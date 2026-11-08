@@ -28,7 +28,7 @@ export default function Dashboard() {
           
           {/* ফেসবুক লিংকসহ নাম */}
           <a 
-            href="https://facebook.com" 
+            href="https://www.facebook.com/KDMahmudM" 
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 hover:text-emerald-300 transition-colors font-medium text-white"
@@ -102,7 +102,7 @@ export default function Dashboard() {
                   className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-emerald-700 bg-emerald-50/80 hover:bg-emerald-100 rounded-lg border border-emerald-200/60 transition-all text-left mt-2"
                 >
                   <Code className="w-4 h-4 text-emerald-600" /> 
-                  <span>ডেভেলোপার তথ্য</span>
+                  <span>ডেভেলপার তথ্য</span>
                 </button>
               </nav>
             </div>
@@ -151,7 +151,7 @@ export default function Dashboard() {
       {/* 🔴 ডেভেলপার বিস্তারিত পপ-আপ মডাল (Modal) */}
       {showDevModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative border border-gray-100 animate-in fade-in zoom-in duration-200">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative border border-gray-100">
             <button 
               onClick={() => setShowDevModal(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 p-1 rounded-full hover:bg-gray-100"
@@ -170,7 +170,7 @@ export default function Dashboard() {
               </div>
 
               <p className="text-sm text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-xl border border-gray-100">
-                মুন্সিগঞ্জ মানবসেবা সংগঠনের ডিজিটাল ড্যাশবোর্ড ও মেম্বারশিপ ম্যানেজমেন্ট সিস্টেমটি আধুনিক ওয়েব প্রযুক্তি (React, Vite, Tailwind CSS) দিয়ে তৈরি ও রক্ষাণাবেক্ষণ করা হচ্ছে।
+                মুন্সিগঞ্জ মানবসেবা সংগঠনের ডিজিটাল ড্যাশবোর্ড ও মেম্বারশিপ ম্যানেজমেন্ট সিস্টেমটি আধুনিক ওয়েব প্রযুক্তি দিয়ে তৈরি ও রক্ষাণাবেক্ষণ করা হচ্ছে।
               </p>
 
               {/* সোশ্যাল ও কন্টাক্ট লিঙ্কস */}
