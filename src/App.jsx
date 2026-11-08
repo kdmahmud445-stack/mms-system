@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   Users, DollarSign, Heart, Calendar, Shield, 
-  Code, Facebook, Phone, X, ExternalLink 
+  Code, Phone, X, ExternalLink 
 } from 'lucide-react';
 
 export default function Dashboard() {
@@ -10,7 +10,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       
-      {/* 🟢 ১. টপ হেডার (Top Header) */}
+      {/* টপ হেডার */}
       <header className="bg-emerald-800 text-white px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3 shadow-md">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-white text-emerald-800 rounded-full flex items-center justify-center font-bold text-xl shadow">
@@ -22,24 +22,25 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* 🔴 ডেভেলপার ইনফো (সবসময় দৃশ্যমান) */}
+        {/* ডেভেলপার ইনফো */}
         <div className="flex items-center gap-3 bg-emerald-900/60 px-3.5 py-1.5 rounded-full text-xs border border-emerald-700/50">
           <span className="text-emerald-200 hidden sm:inline">Software/Web Developer:</span>
           
-          {/* ফেসবুক লিংক সহ নাম */}
           <a 
             href="https://www.facebook.com/KDMahmudM" 
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 hover:text-emerald-300 transition-colors font-medium text-white"
           >
-            <Facebook className="w-3.5 h-3.5 text-blue-400 fill-current" />
+            {/* ফেসবুক এসভিজি আইকন */}
+            <svg className="w-3.5 h-3.5 fill-current text-blue-400" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
             <span className="hover:underline">কাউসার মাহমুদ</span>
           </a>
 
           <span className="text-emerald-600">|</span>
 
-          {/* হোয়াটসঅ্যাপ নাম্বার */}
           <a 
             href="https://wa.me/8801568000445" 
             target="_blank" 
@@ -51,7 +52,6 @@ export default function Dashboard() {
           </a>
         </div>
 
-        {/* রোল ও প্রোফাইল */}
         <div className="flex items-center gap-2">
           <span className="bg-emerald-700 text-emerald-100 text-xs px-2.5 py-1 rounded-full border border-emerald-600 hidden md:inline-block">
             রোল: সুপার অ্যাডমিন
@@ -62,10 +62,10 @@ export default function Dashboard() {
         </div>
       </header>
 
-      {/* মূল বডি Layout */}
+      {/* মূল বডি */}
       <div className="flex flex-1">
         
-        {/* 🟢 ২. বাম পাশের নেভিগেশন সাইডবার (Sidebar) */}
+        {/* সাইডবার */}
         <aside className="w-64 bg-white border-r border-gray-200 p-4 hidden md:flex flex-col justify-between">
           <div className="space-y-6">
             <div>
@@ -96,7 +96,6 @@ export default function Dashboard() {
                   <Shield className="w-4 h-4" /> কমিটি ও শাসনকার্য
                 </a>
 
-                {/* 🔴 ডেভেলপার সম্পর্কিত অপশন */}
                 <button 
                   onClick={() => setShowDevModal(true)}
                   className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg border border-emerald-200 transition-all text-left mt-2"
@@ -109,9 +108,8 @@ export default function Dashboard() {
           </div>
         </aside>
 
-        {/* 🟢 মূল কনটেন্ট (Main Dashboard Content) */}
+        {/* মূল কনটেন্ট */}
         <main className="flex-1 p-4 sm:p-6 space-y-6 overflow-y-auto">
-          {/* স্বাগতম ব্যানার */}
           <div className="bg-emerald-800 rounded-2xl p-6 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-lg">
             <div>
               <h2 className="text-xl sm:text-2xl font-bold mb-1">স্বাগতম, অ্যাডমিন প্যানেলে</h2>
@@ -122,7 +120,6 @@ export default function Dashboard() {
             </button>
           </div>
 
-          {/* পরিসংখ্যান কার্ডসমূহ */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
               <p className="text-xs text-gray-500">মোট রেজিস্টার্ড সদস্য</p>
@@ -148,7 +145,7 @@ export default function Dashboard() {
         </main>
       </div>
 
-      {/* 🔴 ডেভেলপার বিস্তারিত পপ-আপ মডাল (Modal) */}
+      {/* ডেভেলপার মডাল */}
       {showDevModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative border border-gray-100">
@@ -173,7 +170,6 @@ export default function Dashboard() {
                 মুন্সিগঞ্জ মানবসেবা সংগঠনের ডিজিটাল ড্যাশবোর্ড ও মেম্বারশিপ ম্যানেজমেন্ট সিস্টেমটি আধুনিক ওয়েব প্রযুক্তি দিয়ে তৈরি ও রক্ষাণাবেক্ষণ করা হচ্ছে।
               </p>
 
-              {/* সোশ্যাল ও কন্টাক্ট লিঙ্কস */}
               <div className="flex flex-col gap-2 pt-2">
                 <a 
                   href="https://www.facebook.com/KDMahmudM" 
@@ -182,7 +178,10 @@ export default function Dashboard() {
                   className="flex items-center justify-between px-4 py-2.5 bg-blue-50 text-blue-700 rounded-xl hover:bg-blue-100 transition-colors text-sm font-medium"
                 >
                   <span className="flex items-center gap-2">
-                    <Facebook className="w-4 h-4" /> ফেসবুক প্রোফাইল
+                    <svg className="w-4 h-4 fill-current text-blue-600" viewBox="0 0 24 24">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+ ফেসবুক প্রোফাইল
                   </span>
                   <ExternalLink className="w-4 h-4" />
                 </a>
