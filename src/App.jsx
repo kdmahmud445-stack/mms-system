@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   Users, DollarSign, Heart, Calendar, Shield, 
-  Code, Facebook, Phone, X, Award, ExternalLink 
+  Code, Facebook, Phone, X, ExternalLink 
 } from 'lucide-react';
 
 export default function Dashboard() {
@@ -22,11 +22,11 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* 🔴 ডেভেলপার ইনফো (সব ডিভাইসে দৃশ্যমান থাকবে) */}
+        {/* 🔴 ডেভেলপার ইনফো (সবসময় দৃশ্যমান) */}
         <div className="flex items-center gap-3 bg-emerald-900/60 px-3.5 py-1.5 rounded-full text-xs border border-emerald-700/50">
-          <span className="text-emerald-200 hidden sm:inline">Developer:</span>
+          <span className="text-emerald-200 hidden sm:inline">Software/Web Developer:</span>
           
-          {/* ফেসবুক লিংকসহ নাম */}
+          {/* ফেসবুক লিংক সহ নাম */}
           <a 
             href="https://www.facebook.com/KDMahmudM" 
             target="_blank" 
@@ -99,7 +99,7 @@ export default function Dashboard() {
                 {/* 🔴 ডেভেলপার সম্পর্কিত অপশন */}
                 <button 
                   onClick={() => setShowDevModal(true)}
-                  className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-emerald-700 bg-emerald-50/80 hover:bg-emerald-100 rounded-lg border border-emerald-200/60 transition-all text-left mt-2"
+                  className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg border border-emerald-200 transition-all text-left mt-2"
                 >
                   <Code className="w-4 h-4 text-emerald-600" /> 
                   <span>ডেভেলপার তথ্য</span>
@@ -169,4 +169,41 @@ export default function Dashboard() {
                 <p className="text-xs font-semibold text-emerald-600">Software & Web Developer</p>
               </div>
 
-              <p className="text-sm text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-xl border border-gray-10
+              <p className="text-sm text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-xl border border-gray-100">
+                মুন্সিগঞ্জ মানবসেবা সংগঠনের ডিজিটাল ড্যাশবোর্ড ও মেম্বারশিপ ম্যানেজমেন্ট সিস্টেমটি আধুনিক ওয়েব প্রযুক্তি দিয়ে তৈরি ও রক্ষাণাবেক্ষণ করা হচ্ছে।
+              </p>
+
+              {/* সোশ্যাল ও কন্টাক্ট লিঙ্কস */}
+              <div className="flex flex-col gap-2 pt-2">
+                <a 
+                  href="https://www.facebook.com/KDMahmudM" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between px-4 py-2.5 bg-blue-50 text-blue-700 rounded-xl hover:bg-blue-100 transition-colors text-sm font-medium"
+                >
+                  <span className="flex items-center gap-2">
+                    <Facebook className="w-4 h-4" /> ফেসবুক প্রোফাইল
+                  </span>
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+
+                <a 
+                  href="https://wa.me/8801568000445" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between px-4 py-2.5 bg-green-50 text-green-700 rounded-xl hover:bg-green-100 transition-colors text-sm font-medium"
+                >
+                  <span className="flex items-center gap-2">
+                    <Phone className="w-4 h-4" /> হোয়াটসঅ্যাপ: 01568000445
+                  </span>
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+    </div>
+  );
+}
