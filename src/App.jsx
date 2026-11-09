@@ -4,11 +4,10 @@ import {
   Code, Phone, X, ExternalLink, Crown, MapPin, User, 
   Mail, Globe, Droplet, Stethoscope, Utensils, BookOpen, 
   HelpCircle, AlertTriangle, TreePine, Sparkles, Briefcase, 
-  Users2, CheckCircle2, UserPlus, Search, Lock, LogOut 
+  Users2, CheckCircle2, UserPlus, Search, Lock, LogOut, Menu 
 } from 'lucide-react';
 
 export default function Dashboard() {
-  // লগইন স্টেট (ডিফল্টভাবে লগইন করা থাকবে অথবা পাসওয়ার্ড দিয়ে ঢুকতে হবে)
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [loginPhone, setLoginPhone] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
@@ -17,6 +16,7 @@ export default function Dashboard() {
   const [showDevModal, setShowDevModal] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
   const [searchTerm, setSearchTerm] = useState('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // লগইন হ্যান্ডলার
   const handleLogin = (e) => {
@@ -69,8 +69,10 @@ export default function Dashboard() {
     }
   ];
 
-  // এক্সেল (weebb.xlsx) থেকে সংগৃহীত সম্পূর্ণ ১৩৬ জন সদস্যের তালিকা
+  // সম্পূর্ণ সদস্য তালিকা (নতুন ২ জনসহ ১৩৮ জন)
   const [membersList] = useState([
+    {"id": "MMS2026227", "name": "Nirob Rana", "father": "Nijam Uddin", "address": "Mirkadim, Munshiganj", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026228", "name": "খলিলুর রহমান", "father": "মৃত বাদশামিয়া", "address": "বিক্রমপুর, গ্রাম: দক্ষিণ বাকশা, থানা: শ্রীনগর, মুন্সিগঞ্জ", "phone": "N/A", "blood": "জানা নেই"},
     {"id": "MMS2026001", "name": "মোঃ নাজমুল ইসলাম", "father": "মো:হানিফ  শেখ", "address": "দাসতির বাগ, মধ্যপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "01819390632", "blood": "O-"},
     {"id": "MMS2026002", "name": "কাউসার মাহমুদ", "father": "মোঃ নজরুল ইসলাম", "address": "ফুরশাইল, মালখানগর, সিরাজদিখান, মুন্সিগঞ্জ।", "phone": "01568000445", "blood": "B+"},
     {"id": "MMS2026003", "name": "শেখ মোঃ রোমান", "father": "আব্দুল খালেক শেখ", "address": "গ্রামঃ বানকাইজ, ইউনিয়নঃ কলমা, লৌহজং, মুন্সিগঞ্জ", "phone": "+966581831594", "blood": "A-"},
@@ -121,8 +123,7 @@ export default function Dashboard() {
     {"id": "MMS2026138", "name": "সাইফ আল ইসলাম ভূঁইয়া", "father": "হাজী মোহাম্মদ শাহজালাল ভূঁইয়া", "address": "গ্রাম দোসর পাড়া ইউনিয় লতবদি থানা সিরাজদিখান", "phone": "N/A", "blood": "A+"},
     {"id": "MMS2026139", "name": "ইফতেখার ইসলাম সোহেল", "father": "ইউনুস শেখ", "address": "গ্রাম উত্তর ইউনিয়ন তন্তর  শ্রীনগর মুন্সীগঞ্জ", "phone": "N/A", "blood": "O+"},
     {"id": "MMS2026140", "name": "Abdullah Mohammed Taher", "father": "Jahirul haque", "address": "Baliakandi, banglabazar, munshigonj", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026141", "name": "মো: জাহিদ  শেখ",
-    "father": "মো: বাচ্চু শেখ", "address": "বয়রাগাদী সিরাজদিখান মুন্সিগনজ", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026141", "name": "মো: জাহিদ  শেখ", "father": "মো: বাচ্চু শেখ", "address": "বয়রাগাদী সিরাজদিখান মুন্সিগনজ", "phone": "N/A", "blood": "A+"},
     {"id": "MMS2026142", "name": "মোঃ মাকসুদ হোসেন", "father": "বাদশা মিয়া শেখ", "address": "বানিয়াগাও, বেজগাও, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "AB+"},
     {"id": "MMS2026143", "name": "Mawlana Shahidullah", "father": "Abdul Hai Hawlader", "address": "KamarKhara, Sarnagram, Tongibari, Munshiganj", "phone": "N/A", "blood": "B+"},
     {"id": "MMS2026144", "name": "দ্বীন ইসলাম", "father": "আলী মিয়া বেপারী", "address": "Dewankandi, adhara,sadar", "phone": "N/A", "blood": "B+"},
@@ -232,7 +233,7 @@ export default function Dashboard() {
     m.address.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // যদি লগইন করা না থাকে তবে লগইন পেজ দেখাবে
+  // যদি লগইন করা না থাকে
   if (!isLoggedIn) {
     return (
       <div className="min-h-screen bg-emerald-900 flex items-center justify-center p-4 font-sans">
@@ -294,10 +295,18 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       
       {/* 🟢 টপ হেডার */}
-      <header className="bg-emerald-800 text-white px-3 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3 shadow-md">
+      <header className="bg-emerald-800 text-white px-3 sm:px-6 py-3 flex items-center justify-between gap-3 shadow-md">
         
         {/* লোগো ও সংগঠনের নাম + অফিশিয়াল মেইল ও ফেসবুক পেজ */}
         <div className="flex items-center gap-3">
+          {/* মোবাইল মেনু টগল বাটন */}
+          <button 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-1.5 text-white hover:bg-emerald-700 rounded-lg transition-colors"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+
           <div className="w-10 h-10 sm:w-11 sm:h-11 bg-white rounded-full flex items-center justify-center overflow-hidden shadow border-2 border-emerald-600 shrink-0">
             <img 
               src="/logo.jpg" 
@@ -309,14 +318,14 @@ export default function Dashboard() {
             />
           </div>
           <div>
-            <h1 className="text-base sm:text-xl font-bold leading-tight">মুন্সিগঞ্জ মানবসেবা সংগঠন</h1>
+            <h1 className="text-sm sm:text-xl font-bold leading-tight">মুন্সিগঞ্জ মানবসেবা সংগঠন</h1>
             
             {/* ছোট করে অফিশিয়াল মেইল ও ফেসবুক পেজ লিংক */}
-            <div className="flex flex-wrap items-center gap-2 text-[10px] sm:text-[11px] text-emerald-200 mt-0.5">
+            <div className="hidden sm:flex flex-wrap items-center gap-2 text-[10px] sm:text-[11px] text-emerald-200 mt-0.5">
               <a href="mailto:munshiganjmanobsebasonggothon@gmail.com" className="flex items-center gap-1 hover:underline">
                 <Mail className="w-3 h-3 text-emerald-300" /> munshiganjmanobsebasonggothon@gmail.com
               </a>
-              <span className="hidden sm:inline">•</span>
+              <span>•</span>
               <a href="https://www.facebook.com/munshiganj.manobseba" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:underline text-emerald-100">
                 <Globe className="w-3 h-3 text-blue-300" /> Facebook Page
               </a>
@@ -325,7 +334,7 @@ export default function Dashboard() {
         </div>
 
         {/* 🔴 চলমান (Marquee) ডেভেলপার ইনফো */}
-        <div className="flex-1 max-w-xs sm:max-w-xs overflow-hidden bg-emerald-900/80 px-3 py-1.5 rounded-full text-xs border border-emerald-700/60 shadow-inner">
+        <div className="hidden lg:block flex-1 max-w-xs overflow-hidden bg-emerald-900/80 px-3 py-1.5 rounded-full text-xs border border-emerald-700/60 shadow-inner">
           <marquee behavior="scroll" direction="left" scrollamount="4" className="flex items-center text-white font-medium">
             <span className="text-emerald-200 mr-2">Software/Web Developer:</span>
             
@@ -357,7 +366,7 @@ export default function Dashboard() {
 
         {/* ডানপাশে Admin রোল ও লগআউট বাটন */}
         <div className="flex items-center gap-2">
-          <span className="bg-emerald-700 text-emerald-100 text-xs px-2.5 py-1 rounded-full border border-emerald-600">
+          <span className="bg-emerald-700 text-emerald-100 text-xs px-2.5 py-1 rounded-full border border-emerald-600 font-semibold">
             Admin
           </span>
           <button 
@@ -371,54 +380,59 @@ export default function Dashboard() {
       </header>
 
       {/* মূল বডি Layout */}
-      <div className="flex flex-1 flex-col md:flex-row">
+      <div className="flex flex-1 relative">
         
-        {/* 🟢 সাইডবার (মোবাইল ও পিসির জন্য রেসপন্সিভ) */}
-        <aside className="w-full md:w-64 bg-white border-r border-gray-200 p-3 md:p-4 flex flex-row md:flex-col justify-between overflow-x-auto md:overflow-visible shrink-0 gap-2">
-          <div className="flex md:flex-col space-x-2 md:space-x-0 md:space-y-6 w-full">
+        {/* 🟢 সাইডবার */}
+        <aside className={`
+          fixed md:static inset-y-0 left-0 z-40 w-64 bg-white border-r border-gray-200 p-4 flex flex-col justify-between 
+          transform transition-transform duration-300 ease-in-out
+          ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+          mt-[61px] md:mt-0 shadow-lg md:shadow-none
+        `}>
+          <div className="space-y-6">
             <div>
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3 hidden md:block">প্রধান মেনু</p>
-              <nav className="flex md:flex-col space-x-1 md:space-x-0 md:space-y-1">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">প্রধান মেনু</p>
+              <nav className="space-y-1">
                 <button 
-                  onClick={() => setActiveTab('dashboard')}
-                  className={`flex items-center gap-2 md:gap-3 px-3 py-2 text-xs md:text-sm font-medium rounded-lg whitespace-nowrap ${activeTab === 'dashboard' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
+                  onClick={() => { setActiveTab('dashboard'); setMobileMenuOpen(false); }}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-left ${activeTab === 'dashboard' ? 'bg-emerald-50 text-emerald-700 font-bold' : 'text-gray-700 hover:bg-gray-50'}`}
                 >
                   <Users className="w-4 h-4" /> ড্যাশবোর্ড
                 </button>
                 <button 
-                  onClick={() => setActiveTab('members')}
-                  className={`flex items-center gap-2 md:gap-3 px-3 py-2 text-xs md:text-sm font-medium rounded-lg whitespace-nowrap ${activeTab === 'members' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
+                  onClick={() => { setActiveTab('members'); setMobileMenuOpen(false); }}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-left ${activeTab === 'members' ? 'bg-emerald-50 text-emerald-700 font-bold' : 'text-gray-700 hover:bg-gray-50'}`}
                 >
                   <Users className="w-4 h-4" /> সদস্য ব্যবস্থাপনা
                 </button>
                 <button 
-                  onClick={() => setActiveTab('donations')}
-                  className={`flex items-center gap-2 md:gap-3 px-3 py-2 text-xs md:text-sm font-medium rounded-lg whitespace-nowrap ${activeTab === 'donations' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
+                  onClick={() => { setActiveTab('donations'); setMobileMenuOpen(false); }}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-left ${activeTab === 'donations' ? 'bg-emerald-50 text-emerald-700 font-bold' : 'text-gray-700 hover:bg-gray-50'}`}
                 >
                   <DollarSign className="w-4 h-4" /> অনুদান ও হিসাবরক্ষণ
                 </button>
                 <button 
-                  onClick={() => setActiveTab('services')}
-                  className={`flex items-center gap-2 md:gap-3 px-3 py-2 text-xs md:text-sm font-medium rounded-lg whitespace-nowrap ${activeTab === 'services' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
+                  onClick={() => { setActiveTab('services'); setMobileMenuOpen(false); }}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-left ${activeTab === 'services' ? 'bg-emerald-50 text-emerald-700 font-bold' : 'text-gray-700 hover:bg-gray-50'}`}
                 >
                   <Heart className="w-4 h-4" /> সেবাসমূহ
                 </button>
               </nav>
             </div>
 
-            <div className="hidden md:block">
+            <div>
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">অন্যান্য</p>
               <nav className="space-y-1">
                 <button 
-                  onClick={() => setActiveTab('committee')}
-                  className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-left ${activeTab === 'committee' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
+                  onClick={() => { setActiveTab('committee'); setMobileMenuOpen(false); }}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-left ${activeTab === 'committee' ? 'bg-emerald-50 text-emerald-700 font-bold' : 'text-gray-700 hover:bg-gray-50'}`}
                 >
                   <Shield className="w-4 h-4" /> কমিটি ও শাসনকার্য
                 </button>
 
                 <button 
-                  onClick={() => setShowDevModal(true)}
-                  className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg border border-emerald-200 transition-all text-left mt-2"
+                  onClick={() => { setShowDevModal(true); setMobileMenuOpen(false); }}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg border border-emerald-200 transition-all text-left mt-2"
                 >
                   <Code className="w-4 h-4 text-emerald-600" /> 
                   <span>ডেভেলপার তথ্য</span>
@@ -428,6 +442,14 @@ export default function Dashboard() {
           </div>
         </aside>
 
+        {/* মোবাইল মেনু ব্যাকগ্রাউন্ড ওভারলে */}
+        {mobileMenuOpen && (
+          <div 
+            onClick={() => setMobileMenuOpen(false)}
+            className="fixed inset-0 bg-black/40 z-30 md:hidden"
+          />
+        )}
+
         {/* 🟢 মূল কনটেন্ট */}
         <main className="flex-1 p-4 sm:p-6 space-y-6 overflow-y-auto">
           
@@ -436,7 +458,7 @@ export default function Dashboard() {
             <div className="space-y-6">
               <div className="bg-emerald-800 rounded-2xl p-6 text-white shadow-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                  <h2 className="text-2xl font-bold mb-1 flex items-center gap-2">
+                  <h2 className="text-xl sm:text-2xl font-bold mb-1 flex items-center gap-2">
                     <Users className="w-6 h-6 text-amber-400" /> সদস্য ব্যবস্থাপনা ও তালিকা ({membersList.length} জন)
                   </h2>
                   <p className="text-emerald-200 text-sm">
@@ -519,7 +541,7 @@ export default function Dashboard() {
             // যদি 'সেবাসমূহ' ট্যাব সিলেক্ট করা হয়
             <div className="space-y-6">
               <div className="bg-emerald-800 rounded-2xl p-6 text-white shadow-lg">
-                <h2 className="text-2xl font-bold mb-1 flex items-center gap-2">
+                <h2 className="text-xl sm:text-2xl font-bold mb-1 flex items-center gap-2">
                   <Heart className="w-6 h-6 text-rose-400" /> সংগঠনের সেবাসমূহ
                 </h2>
                 <p className="text-emerald-200 text-sm">
@@ -549,8 +571,8 @@ export default function Dashboard() {
             // যদি 'কমিটি ও শাসনকার্য' ট্যাব সিলেক্ট করা হয়
             <div className="space-y-6">
               <div className="bg-emerald-800 rounded-2xl p-6 text-white shadow-lg">
-                <h2 className="text-2xl font-bold mb-1 flex items-center gap-2">
-                  <Crown className="w-6 h-6 text-amber-400" /> প্রতিষ্ঠাতা পরিষদ ও অভিভাবক মণ্ডলী
+                <h2 className="text-xl sm:text-2xl font-bold mb-1 flex items-center gap-2">
+                  <Crown className="w-6 h-6 text-amber-400" /> প্রতিষ্ঠাতা পরিষদ (স্থায়ী মর্যাদাপ্রাপ্ত)
                 </h2>
                 <p className="text-emerald-200 text-sm">
                   মুন্সিগঞ্জ মানবসেবা সংগঠনের স্থায়ী নীতি-নির্ধারক ও সর্বোচ্চ অভিভাবকবৃন্দ।
@@ -613,7 +635,7 @@ export default function Dashboard() {
                   <p className="text-emerald-200 text-sm">মুন্সিগঞ্জ মানবসেবা সংগঠনের সার্বিক কার্যক্রম ও হিসাবরক্ষণ এক নজরে।</p>
                 </div>
                 
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                   <a 
                     href="https://docs.google.com/forms/d/e/1FAIpQLSc0Zu8cxYkNWokVEr5AlbV062lXwYfyT1xRZStM1Y7LPU0Itg/viewform?usp=send_form"
                     target="_blank"
@@ -644,17 +666,17 @@ export default function Dashboard() {
                 </div>
                 <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
                   <p className="text-xs text-gray-500">চলতি মাসের চাঁদা সংগ্রহ</p>
-                  <h3 className="text-2xl font-bold text-gray-800 my-1">৳ ২৪,৫০০</h3>
+                  <h3 className="text-2xl font-bold text-gray-800 my-1">৳ ১০,৬১০</h3>
                   <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded">বকেয়া: ৳ ৩,২০০</span>
                 </div>
                 <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
                   <p className="text-xs text-gray-500">বর্তমান ফান্ড ব্যালেন্স</p>
-                  <h3 className="text-2xl font-bold text-gray-800 my-1">৳ ১,৮৫,৪০০</h3>
+                  <h3 className="text-2xl font-bold text-gray-800 my-1">৳ ২৮,২৮০.১৪</h3>
                   <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">ক্যাশ ও ব্যাংক মিলিয়ে</span>
                 </div>
                 <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
                   <p className="text-xs text-gray-500">পেন্ডিং আবেদন</p>
-                  <h3 className="text-2xl font-bold text-gray-800 my-1">৫ টি</h3>
+                  <h3 className="text-2xl font-bold text-gray-800 my-1">00 টি</h3>
                   <span className="text-xs bg-rose-100 text-rose-700 px-2 py-0.5 rounded">চিকিৎসা ও সদস্যপদ</span>
                 </div>
               </div>
