@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { 
   Users, DollarSign, Heart, Calendar, Shield, 
-  Code, Phone, X, ExternalLink, Crown, MapPin, User 
+  Code, Phone, X, ExternalLink, Crown, MapPin, User, 
+  Mail, Globe, Droplet, Stethoscope, Utensils, BookOpen, 
+  HelpCircle, AlertTriangle, TreePine, Sparkles, Briefcase, 
+  Users2, CheckCircle2 
 } from 'lucide-react';
 
 export default function Dashboard() {
@@ -48,13 +51,28 @@ export default function Dashboard() {
     }
   ];
 
+  // সেবাসমূহের ১১টি সাব-মডিউল তালিকা
+  const servicesList = [
+    { id: 1, title: 'রক্তদান', desc: 'জরুরি রক্তদাতা সংগ্রহ ও রক্তদান কর্মসূচি পরিচালনা।', icon: Droplet, color: 'text-rose-500 bg-rose-50' },
+    { id: 2, title: 'চিকিৎসাসেবা', desc: 'অসহায় ও দরিদ্র রোগীদের চিকিৎসা সহায়তা প্রদান।', icon: Stethoscope, color: 'text-blue-500 bg-blue-50' },
+    { id: 3, title: 'খাদ্য ও বস্ত্র বিতরণ', desc: 'দুস্থ ও পীরিত মানুষের মাঝে খাদ্য ও পোশাক বিতরণ।', icon: Utensils, color: 'text-amber-500 bg-amber-50' },
+    { id: 4, title: 'শিক্ষা সহায়তা', desc: 'গরিব ও মেধাবী শিক্ষার্থীদের শিক্ষা উপকরণ ও আর্থিক সাহায্য।', icon: BookOpen, color: 'text-indigo-500 bg-indigo-50' },
+    { id: 5, title: 'অসহায় মানুষের পাশে দাঁড়ানো', desc: 'বিপদগ্রস্ত ও সংকটকালীন মানুষের জরুরি মানবিক সহায়তা।', icon: HelpCircle, color: 'text-emerald-500 bg-emerald-50' },
+    { id: 6, title: 'দুর্যোগকালীন ত্রাণ', desc: 'বন্যা, সাইক্লোন ও প্রাকৃতিক দুর্যোগে ত্রাণ বিতরণ কার্যক্রম।', icon: AlertTriangle, color: 'text-orange-500 bg-orange-50' },
+    { id: 7, title: 'বৃক্ষরোপণ', desc: 'পরিবেশের ভারসাম্য রক্ষায় বৃক্ষরোপণ ও সচেতনতা বৃদ্ধি।', icon: TreePine, color: 'text-green-600 bg-green-50' },
+    { id: 8, title: 'পরিচ্ছন্নতা অভিযান', desc: 'সমাজ ও এলাকা পরিচ্ছন্ন রাখার বিশেষ কার্যক্রম।', icon: Sparkles, color: 'text-cyan-500 bg-cyan-50' },
+    { id: 9, title: 'কর্মসংস্থান সহায়তা', desc: 'বেকার যুবকদের কর্মসংস্থান ও আত্মকর্মসংস্থানে সহযোগিতা।', icon: Briefcase, color: 'text-purple-500 bg-purple-50' },
+    { id: 10, title: 'সামাজিক সচেতনতা', desc: 'মাদক, কুসংস্কার ও বিভিন্ন সামাজিক অনাচারের বিরুদ্ধে সচেতনতা।', icon: Users2, color: 'text-teal-500 bg-teal-50' },
+    { id: 11, title: 'সদস্য কল্যাণ', desc: 'সংগঠনের সদস্য ও তাদের পরিবারের কল্যাণমূলক কার্যক্রম।', icon: CheckCircle2, color: 'text-pink-500 bg-pink-50' },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       
       {/* 🟢 টপ হেডার */}
       <header className="bg-emerald-800 text-white px-3 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3 shadow-md">
         
-        {/* লোগো ও সংগঠনের নাম */}
+        {/* লোগো ও সংগঠনের নাম + অফিশিয়াল মেইল ও ফেসবুক পেজ */}
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 sm:w-11 sm:h-11 bg-white rounded-full flex items-center justify-center overflow-hidden shadow border-2 border-emerald-600 shrink-0">
             <img 
@@ -68,37 +86,49 @@ export default function Dashboard() {
           </div>
           <div>
             <h1 className="text-base sm:text-xl font-bold leading-tight">মুন্সিগঞ্জ মানবসেবা সংগঠন</h1>
-            <p className="text-[11px] sm:text-xs text-emerald-200">মানুষ মানুষের জন্য; মানবতাই সেবা।</p>
+            
+            {/* ছোট করে অফিশিয়াল মেইল ও ফেসবুক পেজ লিংক */}
+            <div className="flex flex-wrap items-center gap-2 text-[10px] sm:text-[11px] text-emerald-200 mt-0.5">
+              <a href="mailto:munshiganjmanobsebasonggothon@gmail.com" className="flex items-center gap-1 hover:underline">
+                <Mail className="w-3 h-3 text-emerald-300" /> munshiganjmanobsebasonggothon@gmail.com
+              </a>
+              <span className="hidden sm:inline">•</span>
+              <a href="https://www.facebook.com/munshiganj.manobseba" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:underline text-emerald-100">
+                <Globe className="w-3 h-3 text-blue-300" /> Facebook Page
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* 🔴 ডেভেলপার ইনফো (মোবাইল ও পিসি উভয় স্ক্রিনে দৃশ্যমান) */}
-        <div className="flex items-center gap-2 bg-emerald-900/80 px-3 py-1.5 rounded-full text-xs border border-emerald-700/60 shadow-inner">
-          <span className="text-emerald-200 text-[11px] sm:text-xs">Dev:</span>
-          
-          <a 
-            href="https://www.facebook.com/KDMahmudM" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 hover:text-emerald-300 transition-colors font-medium text-white"
-          >
-            <svg className="w-3.5 h-3.5 fill-current text-blue-400 shrink-0" viewBox="0 0 24 24">
-              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-            </svg>
-            <span className="hover:underline">কাউসার মাহমুদ</span>
-          </a>
+        {/* 🔴 ডান দিক থেকে বাম দিকে চলমান (Marquee) ডেভেলপার ইনফো */}
+        <div className="flex-1 max-w-xs sm:max-w-xs overflow-hidden bg-emerald-900/80 px-3 py-1.5 rounded-full text-xs border border-emerald-700/60 shadow-inner">
+          <marquee behavior="scroll" direction="left" scrollamount="4" className="flex items-center text-white font-medium">
+            <span className="text-emerald-200 mr-2">Software/Web Developer:</span>
+            
+            <a 
+              href="https://www.facebook.com/KDMahmudM" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 hover:text-emerald-300 transition-colors text-white mr-3"
+            >
+              <svg className="w-3.5 h-3.5 fill-current text-blue-400 shrink-0" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+              <span className="hover:underline">কাউসার মাহমুদ</span>
+            </a>
 
-          <span className="text-emerald-600">|</span>
+            <span className="text-emerald-500 mr-3">|</span>
 
-          <a 
-            href="https://wa.me/8801568000445" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 hover:text-emerald-300 transition-colors text-white"
-          >
-            <Phone className="w-3.5 h-3.5 text-green-400 fill-current shrink-0" />
-            <span>01568000445</span>
-          </a>
+            <a 
+              href="https://wa.me/8801568000445" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 hover:text-emerald-300 transition-colors text-white"
+            >
+              <Phone className="w-3.5 h-3.5 text-green-400 fill-current shrink-0" />
+              <span>01568000445</span>
+            </a>
+          </marquee>
         </div>
 
         {/* প্রোফাইল রোল */}
@@ -141,7 +171,7 @@ export default function Dashboard() {
                 </button>
                 <button 
                   onClick={() => setActiveTab('services')}
-                  className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg text-left"
+                  className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-left ${activeTab === 'services' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
                 >
                   <Heart className="w-4 h-4" /> সেবাসমূহ
                 </button>
@@ -173,8 +203,38 @@ export default function Dashboard() {
         {/* 🟢 মূল কনটেন্ট */}
         <main className="flex-1 p-4 sm:p-6 space-y-6 overflow-y-auto">
           
-          {/* যদি 'কমিটি ও শাসনকার্য' ট্যাব সিলেক্ট করা হয় */}
-          {activeTab === 'committee' ? (
+          {/* যদি 'সেবাসমূহ' ট্যাব সিলেক্ট করা হয় */}
+          {activeTab === 'services' ? (
+            <div className="space-y-6">
+              <div className="bg-emerald-800 rounded-2xl p-6 text-white shadow-lg">
+                <h2 className="text-2xl font-bold mb-1 flex items-center gap-2">
+                  <Heart className="w-6 h-6 text-rose-400" /> সংগঠনের সেবাসমূহ
+                </h2>
+                <p className="text-emerald-200 text-sm">
+                  মুন্সিগঞ্জ মানবসেবা সংগঠনের মাধ্যমে পরিচালিত বিভিন্ন সামাজিক ও কল্যাণমূলক সাব-মডিউলসমূহ।
+                </p>
+              </div>
+
+              {/* ১১টি সেবার গ্রিড */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {servicesList.map((service) => {
+                  const IconComponent = service.icon;
+                  return (
+                    <div key={service.id} className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex items-start gap-4">
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${service.color}`}>
+                        <IconComponent className="w-6 h-6" />
+                      </div>
+                      <div className="space-y-1">
+                        <h3 className="font-bold text-gray-800 text-base">{service.title}</h3>
+                        <p className="text-xs text-gray-500 leading-relaxed">{service.desc}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ) : activeTab === 'committee' ? (
+            // যদি 'কমিটি ও শাসনকার্য' ট্যাব সিলেক্ট করা হয়
             <div className="space-y-6">
               <div className="bg-emerald-800 rounded-2xl p-6 text-white shadow-lg">
                 <h2 className="text-2xl font-bold mb-1 flex items-center gap-2">
