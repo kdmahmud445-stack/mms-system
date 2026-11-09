@@ -37,7 +37,7 @@ export default function Dashboard() {
       role: 'সভাপতি, প্রতিষ্ঠাতা পরিষদ',
       father: 'মোঃ হানিফ শেখ',
       phone: '01819390632',
-      address: 'রামঃ দাস্তিরবাগ, পোঃ মধ্যপাড়া, ইউঃ খিদিরপাড়া, লৌহজং, মুন্সিগঞ্জ',
+      address: 'গ্রাম :দাস্তিরবাগ পো: মধ্যপাড়া ইউ: খিদিরপাড়া থানা: লৌহজং, জেলা: মুন্সিগঞ্জ',
       image: '/id01.jpg' 
     },
     {
@@ -69,9 +69,9 @@ export default function Dashboard() {
     }
   ];
 
-  // সম্পূর্ণ সদস্য তালিকা (নতুন ২ জনসহ ১৩৮ জন)
+  // সম্পূর্ণ সদস্য তালিকা (১নং সদস্যের ঠিকানা সংশোধন ও নতুন ২ জন সদস্য আইডি সিরিয়াল অনুযায়ী শেষে যুক্ত)
   const [membersList] = useState([
-    {"id": "MMS2026001", "name": "মোঃ নাজমুল ইসলাম", "father": "মো:হানিফ  শেখ", "address": "গ্রামঃ দাস্তিরবাগ, পোঃ মধ্যপাড়া, ইউঃ খিদিরপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "01819390632", "blood": "O-"},
+    {"id": "MMS2026001", "name": "মোঃ নাজমুল ইসলাম", "father": "মো:হানিফ  শেখ", "address": "গ্রাম :দাস্তিরবাগ পো: মধ্যপাড়া ইউ: খিদিরপাড়া থানা :লৌহজং, জেলা: মুন্সিগঞ্জ", "phone": "01819390632", "blood": "O-"},
     {"id": "MMS2026002", "name": "কাউসার মাহমুদ", "father": "মোঃ নজরুল ইসলাম", "address": "ফুরশাইল, মালখানগর, সিরাজদিখান, মুন্সিগঞ্জ।", "phone": "01568000445", "blood": "B+"},
     {"id": "MMS2026003", "name": "শেখ মোঃ রোমান", "father": "আব্দুল খালেক শেখ", "address": "গ্রামঃ বানকাইজ, ইউনিয়নঃ কলমা, লৌহজং, মুন্সিগঞ্জ", "phone": "+966581831594", "blood": "A-"},
     {"id": "MMS2026004", "name": "মোঃ জসিম হালদার", "father": "হাজি আঃ হাই হালদার", "address": "কামারখাড়া,সর্নগ্রাম,টংগীবাড়ি, মুন্সিগঞ্জ", "phone": "+966573325256", "blood": "O+"},
@@ -185,7 +185,7 @@ export default function Dashboard() {
     {"id": "MMS2026202", "name": "মোঃ হেলাল খান আদি", "father": "আব্দুল খালেক মাতুব্বর", "address": "মুন্সিগঞ্জ শ্রীনগর বালাশুর", "phone": "N/A", "blood": "O+"},
     {"id": "MMS2026203", "name": "আবুল খায়ের সেন্টু", "father": "মৃত আবুল কাশেম", "address": "গ্রাম বক্তারকান্দি, ইউনিয়ন বাউশিয়া,গজারিয়া, মুন্সিগঞ্জ", "phone": "N/A", "blood": "জানা নেই"},
     {"id": "MMS2026204", "name": "শান্ত শেখ", "father": "আক্কাস শেখ", "address": "পানিয়া,তন্তর,শ্রীনগড়,মুন্সীগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026205", "name": "আরিফ জমাদার", "father": "নুরুল ইসলাম জমাদার", "address": "গ্রাম: চর-বলাকী ১৫১০,\nইউনিয়ন: হোসেন্দী,\nউপজেলা: গজারিয়া,\nজেলা: মুন্সীগুঞ্জ", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026205", "name": "আরিফ জমাদার", "father": "নুরুল ইসলাম জমাদার", "address": "গ্রাম: চর-বলাকী ১৫,+১০,\nইউনিয়ন: হোসেন্দী,\nউপজেলা: গজারিয়া,\nজেলা: মুন্সীগুঞ্জ", "phone": "N/A", "blood": "A+"},
     {"id": "MMS2026206", "name": "মো: কবির হোসেন", "father": "হাসেম হালদার", "address": "গ্রাম: বানাদেশ\nইউনিয়ন: দিঘীরপার\nউপজেলা: মুন্সীগন্জ সদর\nজেলা: মুন্সীগন্জ", "phone": "N/A", "blood": "B+"},
     {"id": "MMS2026207", "name": "মোঃ ফাহিম ইসলাম রোমান", "father": "মোঃ আবু কালাম বাগোজা", "address": "গ্রাম:নোয়াদ্দ,ইউনিয়ন:আউটশাহী,উপজেলা :টংগিবাড়ি, জেলা:মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
     {"id": "MMS2026208", "name": "মোঃ আনোয়ারুল হক (রাফি)", "father": "মোঃ মকছেদ আলী", "address": "হাতীবান্ধা, লালমনির হাট, রংপুর।", "phone": "N/A", "blood": "O+"},
@@ -206,9 +206,9 @@ export default function Dashboard() {
     {"id": "MMS2026223", "name": "Nahid hasan", "father": "Abu sayed", "address": "Kutipara ,mirkadim. munsigonj", "phone": "N/A", "blood": "O+"},
     {"id": "MMS2026224", "name": "sheikh Sharif", "father": "Samsul sheikh", "address": "গ্রাম নেত্রাবতী সোনা রং ইউনিয়ন উপজেলা টঙ্গীবাড়ী", "phone": "N/A", "blood": "O+"},
     {"id": "MMS2026225", "name": "Ruma Akter", "father": "MD Delour hosen", "address": "14 no kalunager hazaribagh Dhaka 1209", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026226", "name": "RABBI HASAN", "father": "MD KAMAL", "address": "Mirkadim Munshiganj", "phone": "N/A", "blood": "O+"}
- {"id": "MMS2026227", "name": "Nirob Rana", "father": "Nijam Uddin", "address": "Mirkadim, Munshiganj", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026228", "name": "খলিলুর রহমান", "father": "মৃত বাদশামিয়া", "address": "বিক্রমপুর, গ্রাম: দক্ষিণ বাকশা, থানা: শ্রীনগর, মুন্সিগঞ্জ", "phone": "N/A", "blood": "জানা নেই"},  
+    {"id": "MMS2026226", "name": "RABBI HASAN", "father": "MD KAMAL", "address": "Mirkadim Munshiganj", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026227", "name": "Nirob Rana", "father": "Nijam Uddin", "address": "Mirkadim, Munshiganj", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026228", "name": "খলিলুর রহমান", "father": "মৃত বাদশামিয়া", "address": "বিক্রমপুর, গ্রাম: দক্ষিণ বাকশা, থানা: শ্রীনগর, মুন্সিগঞ্জ", "phone": "N/A", "blood": "জানা নেই"}
   ]);
 
   // সেবাসমূহের ১১টি সাব-মডিউল তালিকা
@@ -667,17 +667,17 @@ export default function Dashboard() {
                 <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
                   <p className="text-xs text-gray-500">চলতি মাসের অনুদান</p>
                   <h3 className="text-2xl font-bold text-gray-800 my-1">৳ ১০,৬১০</h3>
-                  <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded">বকেয়া: ৳ ৩,২০০</span>
+                  <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded">বকেয়া: ৳ ১৭,০০০</span>
                 </div>
                 <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
                   <p className="text-xs text-gray-500">বর্তমান ফান্ড ব্যালেন্স</p>
-                  <h3 className="text-2xl font-bold text-gray-800 my-1">৳ ২৮,২৮০.১৪</h3>
+                  <h3 className="text-2xl font-bold text-gray-800 my-1">৳ ২৮,২৮০.১৪/-</h3>
                   <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">ক্যাশ ও ব্যাংক মিলিয়ে</span>
                 </div>
                 <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
                   <p className="text-xs text-gray-500">পেন্ডিং আবেদন</p>
-                  <h3 className="text-2xl font-bold text-gray-800 my-1">00 টি</h3>
-                  <span className="text-xs bg-rose-100 text-rose-700 px-2 py-0.5 rounded">চিকিৎসা ও সদস্যপদ</span>
+                  <h3 className="text-2xl font-bold text-gray-800 my-1">৫ টি</h3>
+                  <span className="text-xs bg-rose-100 text-rose-700 px-2 py-0.5 rounded"> সদস্যপদ</span>
                 </div>
               </div>
             </>
