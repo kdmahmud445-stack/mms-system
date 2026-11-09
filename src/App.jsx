@@ -4,12 +4,13 @@ import {
   Code, Phone, X, ExternalLink, Crown, MapPin, User, 
   Mail, Globe, Droplet, Stethoscope, Utensils, BookOpen, 
   HelpCircle, AlertTriangle, TreePine, Sparkles, Briefcase, 
-  Users2, CheckCircle2 
+  Users2, CheckCircle2, UserPlus, Search 
 } from 'lucide-react';
 
 export default function Dashboard() {
   const [showDevModal, setShowDevModal] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [searchTerm, setSearchTerm] = useState('');
 
   // প্রতিষ্ঠাতা পরিষদের ৪ জন স্থায়ী সদস্যের সঠিক তথ্য ও ছবি
   const founders = [
@@ -51,6 +52,14 @@ export default function Dashboard() {
     }
   ];
 
+  // এক্সেল শিট থেকে প্রাপ্ত সদস্যদের তালিকা (স্যাম্পল ডেটা, প্রয়োজনে আরও যোগ করতে পারবেন)
+  const [membersList, setMembersList] = useState([
+    { id: 'MMS2024001', name: 'মোঃ কাউসার মাহমুদ', father: 'নজরুল ইসলাম', address: 'ফুরশাইল, মালখানগর, সিরাজদিখান, মুন্সিগঞ্জ', phone: '01568000445', blood: 'B+' },
+    { id: 'MMS2024002', name: 'নাজমুল হাসান', father: 'মোঃ হানিফ শেখ', address: 'দাসতির বাগ, মধ্যপাড়া, সিরাজদিখান, মুন্সিগঞ্জ', phone: '01819390632', blood: 'O+' },
+    { id: 'MMS2024003', name: 'শেখ মোঃ রোমান', father: 'আব্দুল খালেক শেখ', address: 'বানকাইজ, কলমা, লৌহজং, মুন্সিগঞ্জ', phone: '+966581831594', blood: 'A+' },
+    { id: 'MMS2024004', name: 'মোঃ জসিম হালদার', father: 'হাজী আঃ হাই হালদার', address: 'কামারখারা, স্বর্নগ্রাম, টঙ্গীবাড়ী, মুন্সিগঞ্জ', phone: '+966573325256', blood: 'AB+' },
+  ]);
+
   // সেবাসমূহের ১১টি সাব-মডিউল তালিকা
   const servicesList = [
     { id: 1, title: 'রক্তদান', desc: 'জরুরি রক্তদাতা সংগ্রহ ও রক্তদান কর্মসূচি পরিচালনা।', icon: Droplet, color: 'text-rose-500 bg-rose-50' },
@@ -65,6 +74,13 @@ export default function Dashboard() {
     { id: 10, title: 'সামাজিক সচেতনতা', desc: 'মাদক, কুসংস্কার ও বিভিন্ন সামাজিক অনাচারের বিরুদ্ধে সচেতনতা।', icon: Users2, color: 'text-teal-500 bg-teal-50' },
     { id: 11, title: 'সদস্য কল্যাণ', desc: 'সংগঠনের সদস্য ও তাদের পরিবারের কল্যাণমূলক কার্যক্রম।', icon: CheckCircle2, color: 'text-pink-500 bg-pink-50' },
   ];
+
+  // ফিল্টার করা সদস্য
+  const filteredMembers = membersList.filter(m => 
+    m.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    m.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    m.address.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
@@ -159,13 +175,13 @@ export default function Dashboard() {
                 </button>
                 <button 
                   onClick={() => setActiveTab('members')}
-                  className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg text-left"
+                  className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-left ${activeTab === 'members' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
                 >
                   <Users className="w-4 h-4" /> সদস্য ব্যবস্থাপনা
                 </button>
                 <button 
                   onClick={() => setActiveTab('donations')}
-                  className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg text-left"
+                  className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-left ${activeTab === 'donations' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
                 >
                   <DollarSign className="w-4 h-4" /> অনুদান ও হিসাবরক্ষণ
                 </button>
@@ -203,8 +219,88 @@ export default function Dashboard() {
         {/* 🟢 মূল কনটেন্ট */}
         <main className="flex-1 p-4 sm:p-6 space-y-6 overflow-y-auto">
           
-          {/* যদি 'সেবাসমূহ' ট্যাব সিলেক্ট করা হয় */}
-          {activeTab === 'services' ? (
+          {/* যদি 'সদস্য ব্যবস্থাপনা' ট্যাব সিলেক্ট করা হয় */}
+          {activeTab === 'members' ? (
+            <div className="space-y-6">
+              <div className="bg-emerald-800 rounded-2xl p-6 text-white shadow-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                  <h2 className="text-2xl font-bold mb-1 flex items-center gap-2">
+                    <Users className="w-6 h-6 text-amber-400" /> সদস্য ব্যবস্থাপনা ও তালিকা
+                  </h2>
+                  <p className="text-emerald-200 text-sm">
+                    মুন্সিগঞ্জ মানবসেবা সংগঠনের রেজিস্টার্ড সকল সদস্যের তথ্য।
+                  </p>
+                </div>
+                
+                {/* সদস্য আবেদন বাটন (গুগল ফর্ম লিংক যুক্ত) */}
+                <a 
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSc0Zu8cxYkNWokVEr5AlbV062lXwYfyT1xRZStM1Y7LPU0Itg/viewform?usp=send_form"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-amber-500 hover:bg-amber-600 text-white font-medium px-4 py-2.5 rounded-xl text-sm shadow transition-colors flex items-center gap-2 shrink-0"
+                >
+                  <UserPlus className="w-4 h-4" /> নতুন সদস্য আবেদন
+                </a>
+              </div>
+
+              {/* সার্চ বক্স */}
+              <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex items-center gap-3">
+                <Search className="w-5 h-5 text-gray-400" />
+                <input 
+                  type="text" 
+                  placeholder="সদস্যের নাম, আইডি বা ঠিকানা দিয়ে খুঁজুন..." 
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full text-sm outline-none bg-transparent"
+                />
+              </div>
+
+              {/* সদস্যদের টেবিল */}
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="bg-emerald-50 text-emerald-900 text-xs uppercase tracking-wider border-b border-gray-100">
+                        <th className="p-4 font-semibold">মেম্বার আইডি</th>
+                        <th className="p-4 font-semibold">সদস্যের নাম</th>
+                        <th className="p-4 font-semibold">পিতার নাম</th>
+                        <th className="p-4 font-semibold">ঠিকানা</th>
+                        <th className="p-4 font-semibold">মোবাইল</th>
+                        <th className="p-4 font-semibold text-center">রক্তের গ্রুপ</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100 text-sm text-gray-700">
+                      {filteredMembers.length > 0 ? (
+                        filteredMembers.map((member, index) => (
+                          <tr key={index} className="hover:bg-gray-50/80 transition-colors">
+                            <td className="p-4 font-medium text-emerald-700">{member.id}</td>
+                            <td className="p-4 font-bold text-gray-800">{member.name}</td>
+                            <td className="p-4 text-gray-600">{member.father}</td>
+                            <td className="p-4 text-gray-600 max-w-xs truncate">{member.address}</td>
+                            <td className="p-4">
+                              <a href={`tel:${member.phone}`} className="text-emerald-600 hover:underline flex items-center gap-1 font-medium">
+                                <Phone className="w-3.5 h-3.5" /> {member.phone}
+                              </a>
+                            </td>
+                            <td className="p-4 text-center">
+                              <span className="bg-rose-50 text-rose-600 font-bold text-xs px-2.5 py-1 rounded-full border border-rose-100">
+                                {member.blood}
+                              </span>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="6" className="p-6 text-center text-gray-400">কোনো সদস্য পাওয়া যায়নি।</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          ) : activeTab === 'services' ? (
+            // যদি 'সেবাসমূহ' ট্যাব সিলেক্ট করা হয়
             <div className="space-y-6">
               <div className="bg-emerald-800 rounded-2xl p-6 text-white shadow-lg">
                 <h2 className="text-2xl font-bold mb-1 flex items-center gap-2">
@@ -300,20 +396,35 @@ export default function Dashboard() {
                   <h2 className="text-xl sm:text-2xl font-bold mb-1">স্বাগতম, অ্যাডমিন প্যানেলে</h2>
                   <p className="text-emerald-200 text-sm">মুন্সিগঞ্জ মানবসেবা সংগঠনের সার্বিক কার্যক্রম ও হিসাবরক্ষণ এক নজরে।</p>
                 </div>
-                <button 
-                  onClick={() => setActiveTab('committee')}
-                  className="bg-amber-500 hover:bg-amber-600 text-white font-medium px-4 py-2 rounded-lg text-sm shadow transition-colors flex items-center gap-2"
-                >
-                  <Crown className="w-4 h-4" /> প্রতিষ্ঠাতা পরিষদ দেখুন
-                </button>
+                
+                <div className="flex items-center gap-3">
+                  <a 
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSc0Zu8cxYkNWokVEr5AlbV062lXwYfyT1xRZStM1Y7LPU0Itg/viewform?usp=send_form"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-amber-500 hover:bg-amber-600 text-white font-medium px-4 py-2 rounded-lg text-sm shadow transition-colors flex items-center gap-2"
+                  >
+                    <UserPlus className="w-4 h-4" /> সদস্য আবেদন ফরম
+                  </a>
+
+                  <button 
+                    onClick={() => setActiveTab('committee')}
+                    className="bg-emerald-700 hover:bg-emerald-600 text-white font-medium px-4 py-2 rounded-lg text-sm shadow transition-colors flex items-center gap-2 border border-emerald-600"
+                  >
+                    <Crown className="w-4 h-4" /> প্রতিষ্ঠাতা পরিষদ
+                  </button>
+                </div>
               </div>
 
               {/* পরিসংখ্যান কার্ড */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                <div 
+                  onClick={() => setActiveTab('members')}
+                  className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm cursor-pointer hover:border-emerald-300 transition-all"
+                >
                   <p className="text-xs text-gray-500">মোট রেজিস্টার্ড সদস্য</p>
                   <h3 className="text-2xl font-bold text-gray-800 my-1">২৪৮ জন</h3>
-                  <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">সক্রিয়: ২৩৫ জন</span>
+                  <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">তালিকা দেখতে ক্লিক করুন</span>
                 </div>
                 <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
                   <p className="text-xs text-gray-500">চলতি মাসের চাঁদা সংগ্রহ</p>
