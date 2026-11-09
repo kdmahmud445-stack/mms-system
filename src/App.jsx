@@ -44,7 +44,7 @@ export default function Dashboard() {
       father: 'হাজী আঃ হাই হালদার',
       phone: '+966573325256',
       address: 'গ্রামঃ কামারখারা, ইউঃ স্বর্নগ্রাম, উপজেলাঃ টঙ্গীবাড়ী, মুন্সিগঞ্জ',
-      image: '/id04.jpg'
+      image: '/id04.png'
     }
   ];
 
