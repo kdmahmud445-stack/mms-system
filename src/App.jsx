@@ -37,7 +37,7 @@ export default function Dashboard() {
       role: 'সভাপতি, প্রতিষ্ঠাতা পরিষদ',
       father: 'মোঃ হানিফ শেখ',
       phone: '01819390632',
-      address: 'গ্রামঃ দাসতির বাগ, ইউঃ মধ্যপাড়া, উপজেলাঃ সিরাজদিখান, মুন্সিগঞ্জ',
+      address: 'রামঃ দাস্তিরবাগ, পোঃ মধ্যপাড়া, ইউঃ খিদিরপাড়া, লৌহজং, মুন্সিগঞ্জ',
       image: '/id01.jpg' 
     },
     {
@@ -71,9 +71,7 @@ export default function Dashboard() {
 
   // সম্পূর্ণ সদস্য তালিকা (নতুন ২ জনসহ ১৩৮ জন)
   const [membersList] = useState([
-    {"id": "MMS2026227", "name": "Nirob Rana", "father": "Nijam Uddin", "address": "Mirkadim, Munshiganj", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026228", "name": "খলিলুর রহমান", "father": "মৃত বাদশামিয়া", "address": "বিক্রমপুর, গ্রাম: দক্ষিণ বাকশা, থানা: শ্রীনগর, মুন্সিগঞ্জ", "phone": "N/A", "blood": "জানা নেই"},
-    {"id": "MMS2026001", "name": "মোঃ নাজমুল ইসলাম", "father": "মো:হানিফ  শেখ", "address": "দাসতির বাগ, মধ্যপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "01819390632", "blood": "O-"},
+    {"id": "MMS2026001", "name": "মোঃ নাজমুল ইসলাম", "father": "মো:হানিফ  শেখ", "address": "গ্রামঃ দাস্তিরবাগ, পোঃ মধ্যপাড়া, ইউঃ খিদিরপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "01819390632", "blood": "O-"},
     {"id": "MMS2026002", "name": "কাউসার মাহমুদ", "father": "মোঃ নজরুল ইসলাম", "address": "ফুরশাইল, মালখানগর, সিরাজদিখান, মুন্সিগঞ্জ।", "phone": "01568000445", "blood": "B+"},
     {"id": "MMS2026003", "name": "শেখ মোঃ রোমান", "father": "আব্দুল খালেক শেখ", "address": "গ্রামঃ বানকাইজ, ইউনিয়নঃ কলমা, লৌহজং, মুন্সিগঞ্জ", "phone": "+966581831594", "blood": "A-"},
     {"id": "MMS2026004", "name": "মোঃ জসিম হালদার", "father": "হাজি আঃ হাই হালদার", "address": "কামারখাড়া,সর্নগ্রাম,টংগীবাড়ি, মুন্সিগঞ্জ", "phone": "+966573325256", "blood": "O+"},
@@ -209,6 +207,8 @@ export default function Dashboard() {
     {"id": "MMS2026224", "name": "sheikh Sharif", "father": "Samsul sheikh", "address": "গ্রাম নেত্রাবতী সোনা রং ইউনিয়ন উপজেলা টঙ্গীবাড়ী", "phone": "N/A", "blood": "O+"},
     {"id": "MMS2026225", "name": "Ruma Akter", "father": "MD Delour hosen", "address": "14 no kalunager hazaribagh Dhaka 1209", "phone": "N/A", "blood": "O+"},
     {"id": "MMS2026226", "name": "RABBI HASAN", "father": "MD KAMAL", "address": "Mirkadim Munshiganj", "phone": "N/A", "blood": "O+"}
+ {"id": "MMS2026227", "name": "Nirob Rana", "father": "Nijam Uddin", "address": "Mirkadim, Munshiganj", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026228", "name": "খলিলুর রহমান", "father": "মৃত বাদশামিয়া", "address": "বিক্রমপুর, গ্রাম: দক্ষিণ বাকশা, থানা: শ্রীনগর, মুন্সিগঞ্জ", "phone": "N/A", "blood": "জানা নেই"},  
   ]);
 
   // সেবাসমূহের ১১টি সাব-মডিউল তালিকা
@@ -665,7 +665,7 @@ export default function Dashboard() {
                   <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">তালিকা দেখতে ক্লিক করুন</span>
                 </div>
                 <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-                  <p className="text-xs text-gray-500">চলতি মাসের চাঁদা সংগ্রহ</p>
+                  <p className="text-xs text-gray-500">চলতি মাসের অনুদান</p>
                   <h3 className="text-2xl font-bold text-gray-800 my-1">৳ ১০,৬১০</h3>
                   <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded">বকেয়া: ৳ ৩,২০০</span>
                 </div>
