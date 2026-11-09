@@ -4,13 +4,30 @@ import {
   Code, Phone, X, ExternalLink, Crown, MapPin, User, 
   Mail, Globe, Droplet, Stethoscope, Utensils, BookOpen, 
   HelpCircle, AlertTriangle, TreePine, Sparkles, Briefcase, 
-  Users2, CheckCircle2, UserPlus, Search 
+  Users2, CheckCircle2, UserPlus, Search, Lock, LogOut 
 } from 'lucide-react';
 
 export default function Dashboard() {
+  // লগইন স্টেট (ডিফল্টভাবে লগইন করা থাকবে অথবা পাসওয়ার্ড দিয়ে ঢুকতে হবে)
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [loginPhone, setLoginPhone] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+
   const [showDevModal, setShowDevModal] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
   const [searchTerm, setSearchTerm] = useState('');
+
+  // লগইন হ্যান্ডলার
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (loginPhone === '01568000445' && loginPassword === 'MMS@2026a') {
+      setIsLoggedIn(true);
+      setLoginError('');
+    } else {
+      setLoginError('ভুল নম্বর অথবা পাসওয়ার্ড! সঠিক তথ্য দিন।');
+    }
+  };
 
   // প্রতিষ্ঠাতা পরিষদের ৪ জন স্থায়ী সদস্যের সঠিক তথ্য ও ছবি
   const founders = [
@@ -66,129 +83,130 @@ export default function Dashboard() {
     {"id": "MMS2026023", "name": "লিমা আক্তার", "father": "মৃত্যু  আব্দল হক হাওলাদর", "address": "গ্রাম দঃ তাজপুর পোঃ দঃ তাজপুর থানা সিরাজ দিখান  জেলা মুন্সীগজ", "phone": "N/A", "blood": "A+"},
     {"id": "MMS2026101", "name": "Md. Alamin madbor", "father": "Late.Md.Shakander madbor", "address": "Mulchar ,Dighirpr,tongibari,Munshigonj", "phone": "N/A", "blood": "B-"},
     {"id": "MMS2026102", "name": "Al Rafi", "father": "Atour Rahman", "address": "Armohal, Malkhanagar, Sirajdikhan, Munshiganj", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026103", "name": "খায়রুল ইসলাম", "father": "আব্দুল ছালাম শেখ", "address": "বানকাইজ কড়ই তলা, লৌহজং মুন্সীগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026104", "name": "মোঃ মেহেদী হাসান", "father": "মোঃ হারুন অর রশীদ", "address": "পশ্চিম রাজদিয়া , সিরাজদিখান , মুন্সিগঞ্জ।", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026105", "name": "Abdul haq", "father": "Md abul kashem mondal", "address": "Mulchar,Dighirpar,Tongibari,Munshigonj", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026106", "name": "সাব্বির হোসেন রাজু", "father": "মোস্তফা প্রধানীয়া", "address": "হোসেন্দী , গজারিয়া , মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026107", "name": "মাসুম শেখ", "father": "মোঃ সেলিম শেখ", "address": "গ্রাম : বানকাইজ, ইউনিয়ন: কলমা, উপজেলা: লৌহজং, জেলা : মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026108", "name": "Abdullah Al Noman Sheikh", "father": "Sumon Sheikh", "address": "Bankaiz , Kolma, Louhajang, Munshiganj", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026109", "name": "মোঃ রিয়াদ হাসান", "father": "মোঃ দেলোয়ার হোসেন", "address": "হোসেন্দী, গজারিয়া, মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026110", "name": "মাওঃ মোঃ রবিউল হোসেন", "father": "মোঃ আনোয়ার হোসেন", "address": "গ্রাম-বড় বেতাকী, ডাকঘর-রাধানগর, উপজেলা-সিরাজদিখান, জেলা-মুন্সিগঞ্জ।", "phone": "N/A", "blood": "AB+"},
-    {"id": "MMS2026111", "name": "মোঃ কাউছার শেখ", "father": "মোঃ জালাল শেখ", "address": "বানকাইজ, কলমা, লৌহজং, মুন্সীগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026112", "name": "আলিফ হোসেন", "father": "মোঃ ফারুক হোসেন", "address": "বানকাইজ,কলমা,লৌহজং,মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026113", "name": "তানজিনা আক্তার", "father": "মোঃ কবির হোসেন", "address": "হোসেন্দী, গজারিয়া, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026114", "name": "মোঃ আক্তার হোসেন", "father": "মোঃ আলফাজ উদ্দীন শেখ", "address": "বানকাইজ, কলমা, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026115", "name": "Raijul Saem Raiyan", "father": "M. A. Gaffar", "address": "Shekharnagar, Sirajdikhan, Munshiganj", "phone": "N/A", "blood": "AB+"},
-    {"id": "MMS2026116", "name": "মিজানুর রহমান", "father": "আঃ সালাম হাওলাদার", "address": "চরখিদিরপুর, কালিরচর, গজারিয়া, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026117", "name": "Md Raihan Ahamed", "father": "Md Mizanur rahaman", "address": "Chorkhidirpur, kalirchor,gajaria,munshigonj", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026118", "name": "Md  Shohag Hosen", "father": "Md  Manik Mia", "address": "Gram  islampur. Gujaria Munshiganj", "phone": "N/A", "blood": "AB+"},
-    {"id": "MMS2026119", "name": "মোঃ আলামিন হেসেন", "father": "মোঃ সুলতান ভুঁইয়া", "address": "চরচাষী, গজারিয়া, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026120", "name": "মোঃ রিপন", "father": "আ: হালিম", "address": "বানকাইজ,কলমা,লৌহজং,মুন্সিগঞ্জ।", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026121", "name": "মোঃ শাকিব খন্দকার", "father": "মোঃ মফিজুল ইসলাম খন্দকার", "address": "হাতেখোরী, চরপাদোরপুর্, কালিরচোর, গজাড়িয়া, মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026122", "name": "মোঃ জাহিদুল ইসলাম মোল্লা (অপু)", "father": "মোঃ মালেক মোল্লা", "address": "গ্রামঃ দাসতিরবাগ, ইউঃ মধ্যপাড়া, উপজেলাঃ লৌহজং, জেলাঃ মুন্সিগঞ্জ।", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026123", "name": "সুমন ভুইয়া", "father": "মৃত বাবুল ভুইয়া", "address": "ইসা পুর ডাবর কোল্ট ষ্টোরেজ সাথে সিরাজদিখান মুন্সী গন্জ।", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026124", "name": "Md Sajib", "father": "Md Abul Kashem", "address": "Hosendi, Gajaria, Munshiganj", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026125", "name": "মোঃ রাব্বি", "father": "মোঃ সোলাইমান", "address": "ইসলামপুর গজারিয়া মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026126", "name": "মোঃ রানা সরকার", "father": "মোঃ মোশারফ হোসেন সরকার", "address": "ইসলামপুর,গজারিয়া,মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026127", "name": "মোঃ নাফিজ রহমান সায়েম", "father": "সাইদুর রহমান সাইদ", "address": "দাসতির বাগ মধ্যপাড়া লৌহজং মুন্সীগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026128", "name": "Hossen ahamed", "father": "Md noor ahamed mondol", "address": "Mulchar , dighirpar ,tongibari munshigonj", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026129", "name": "Md sojib", "father": "Md sobahan", "address": "Mulchar dighirpar tongibari munshigonj", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026130", "name": "Md shamim", "father": "Md mostofa", "address": "Mulchar dighirpar tongibari munshigonj", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026131", "name": "মোঃ সিফাত সরকার", "father": "মোঃ বাবুল সরকার", "address": "মিনারচর,গজারিয়া,মুন্সিগঞ্জ", "phone": "N/A", "blood": "AB+"},
-    {"id": "MMS2026132", "name": "Md Rifat Sarkar", "father": "Md Babul Sarkar", "address": "Minarchor, Gujaria, Munshiganj", "phone": "N/A", "blood": "AB+"},
-    {"id": "MMS2026133", "name": "তানজিল শেখ", "father": "মৃত জহিরুল ইসলাম শেখ", "address": "বানকাইজ কলমা লৌহজং মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026134", "name": "মোঃ আব্দুল্লাহ আল নোমান", "father": "মৃত বিল্লাল হোসেন", "address": "দাসতির বাগ, মধ্যপাড়া, লৌহজং, মুন্সীগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026135", "name": "আল মামুন শিমুল", "father": "হুমায়ুন কবির", "address": "রশুনিয়া, সিরাজদিখান, মুন্সিগঞ্জ।", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026136", "name": "Md  Sabbir hosan", "father": "Md  Belal Hossan", "address": "Garam.  Islampur  thana.  Gujaria  zila.  Munshiganj", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026137", "name": "মোঃ আরমান শেখ", "father": "মোঃ তোফায়েল শেখ", "address": "বানকাইজ কলমা লৌহজং মুন্সীগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026138", "name": "Md shihab khan", "father": "Masud khan", "address": "Gram : Dastir bag , Union : Moddopara , Thana : Lohajong , Munshigonj", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026139", "name": "রাহাত হাসান", "father": "আফজাল হোসেন", "address": "দাসতিরবাগ মধ্যপাড়া লৌহজং মুন্সীগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026140", "name": "মোঃ আশিকুর রহমান সাকিব", "father": "মোঃ সিরাজুল ইসলাম প্রামানিক", "address": "পশ্চিম রাজদিয়া , সিরাজদিখান , মুন্সিগঞ্জ।", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026141", "name": "ফারহানা আফরোজ মিমি", "father": "মোঃ ফিরোজ আহাম্মেদ", "address": "পশ্চিম রাজদিয়া , সিরাজদিখান , মুন্সিগঞ্জ।", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026142", "name": "মোঃ জাবেদ হোসাইন", "father": "মোঃ হাবিবুল্লাহ্", "address": "হোসেন্দী, গজারিয়া, মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026143", "name": "Md  Sumon Hosen", "father": "Md  Jamal mia", "address": "Islampur, Gajaria, Munshiganj", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026144", "name": "মৌমিতা আক্তার সেতু", "father": "সাত্তার বেপারী", "address": "দাসতিরবাগ , মধ্যপাড়া ,লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026145", "name": "মোঃ সাইফুল ইসলাম সুজন", "father": "সোলেমান বেপারী", "address": "দাসতিরবাগ,মধ্যপাড়া,লৌহজং,মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026146", "name": "মোঃ মোশারফ হোসেন প্রামাণিক", "father": "মৃত নিজামুদ্দিন প্রামাণিক", "address": "পশ্চিম রাজদিয়া,সিরাজদিখান,মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026147", "name": "মোঃ তানজিল সেখ", "father": "মো মোশারফ সেখ", "address": "পশ্চিম রাজদিয়া, সিরাজদিখান, মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026148", "name": "MD Rony", "father": "MD Monir Hosen", "address": "Islampur Gajaria Munshigonj", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026149", "name": "মোঃ সিয়াম মিজি", "father": "মোঃ হেলাল মিজি", "address": "চরচাষী গজারিয়া মুন্সীগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026150", "name": "মোঃ সজল মোল্লা", "father": "মোঃ আক্তার হোসেন মোল্লা", "address": "মোকামকুটিয়া,কলমা,লৌহজং,মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026151", "name": "মোঃ সাব্বির হোসেন", "father": "মোঃ খোকন মিয়া", "address": "গ্রামঃ দাসতিরবাগ, ইউঃ মধ্যপাড়া, উপজেলাঃ লৌহজং, জেলাঃ মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026152", "name": "মোহাম্মদ আল আমিন চিশতী", "father": "মোহাম্মদ ইউসুফ চিশতী", "address": "মুকসেদপুর, বালিগাঁও, টংগীবাড়ী, মুন্সীগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026153", "name": "Md Eahian Khan Sanu", "father": "Md Mokarrom Hossain Khan", "address": "Village: Malkhanagar, P.O: Malkhanagar, Thana: Sirajdikhan, District: Munshiganj", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026154", "name": "মোঃ মোনতাছির রহমান ফাহিম", "father": "মোঃ জহিরুল ইসলাম রাজু", "address": "হোসেন্দী, গজারিয়া, মুন্সীগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026155", "name": "ফারহান আহমেদ স্বাধীন", "father": "আবু নাঈম প্রধান", "address": "নয়াকান্দা,গজারিয়া,মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026156", "name": "জিসান বেপারী", "father": "জনি বেপারী", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সীগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026157", "name": "মো: রিফাত হোসেন", "father": "মো: আনোয়ার হোসেন", "address": "ইসা পুর ডাবর কোল্ট ষ্টোরেজ সাথে সিরাজদিখান মুন্সী গন্জ।", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026158", "name": "মৃতঃ আব্দুল মান্নান ভুইয়া", "father": "মৃত হাজী আঃ জলিল ভুইয়া", "address": "হোসেন্দী, গজারিয়া, মুন্সিগঞ্জ।", "phone": "N/A", "blood": "AB+"},
-    {"id": "MMS2026159", "name": "মোঃ সামিন ইয়াসার", "father": "কাউসার মাহমুদ", "address": "ফুরশাইল, মালখানগর, সিরাজদিখান, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026160", "name": "মোসাঃ মারিয়া কাউসার", "father": "কাউসার মাহমুদ", "address": "ফুরশাইল, মালখানগর, সিরাজদিখান, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026161", "name": "মোঃ আল হাসিব গোলদার", "father": "মোঃ সিরাজুল ইসলাম গোলদার", "address": "দাসতিরবাগ,মধ্যপাড়া,লৌহজং,মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026162", "name": "MD. YASIN ARAFAT", "father": "MD. KHALILUR RAHMAN KHAN", "address": "Gram : Dastir bag , Union : Moddopara , Thana : Lohajong , Munshigonj", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026163", "name": "MD SOBUJ AHAMED", "father": "MD SOLIMAN MIA", "address": "Village: Vater char, Thana: Gujaria, Dist: Munshiganj", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026164", "name": "মোঃ সানি ভুইঁয়া", "father": "মোঃ বাবুল ভূঁইয়া", "address": "দাসতিরবাগ মধ্যপাড়া লৌহজং মুন্সীগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026165", "name": "মোঃ সাব্বির শেখ", "father": "মোঃ ইসমাইল শেখ", "address": "বানকাইজ,কলমা,লৌহজং,মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026166", "name": "Md Mahim Sheikh", "father": "Md Sajjad Sheikh", "address": "Bankaiz, Kalma, Louhajang, Munshiganj", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026167", "name": "মোহাম্মদ বিল্লাল হোসেন", "father": "মোহাম্মদ লিয়াকত আলী", "address": "ইসা পুর ডাবর কোল্ট ষ্টোরেজ সাথে সিরাজদিখান মুন্সী গন্জ।", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026168", "name": "মোঃ জাহিদুল ইসলাম পিয়াস", "father": "মোঃ রাজু বেপারী", "address": "দাসতিরবাগ মধ্যপাড়া লৌহজং মুন্সীগঞ্জ", "phone": "N/A", "blood": "AB+"},
-    {"id": "MMS2026169", "name": "Md: Roman Mollik", "father": "Md: Jamal Mollik", "address": "Hosendi, Gajaria, Munshiganj", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026170", "name": "Md Nazmul Hasan Nishad", "father": "Alomgir Sheikh", "address": "Armohal, Malkhanagar, Sirajdikhan, Munshiganj", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026171", "name": "মোঃ সাইদুল ইসলাম", "father": "মোঃ শাহ জালাল শিকদার", "address": "ফুরশাইল, মালখানগর, সিরাজদিখান, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026172", "name": "মাহমুদুল হাসান মুন্না", "father": "কামাল হোসেন", "address": "ইসলামপুর,গজারিয়া,মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026173", "name": "মো: রুবেল মিয়া", "father": "জয়নাল আবেদিন", "address": "হোসেন্দী, গজারিয়া, মুন্সিগঞ্জ।", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026174", "name": "সজিব খান", "father": "তোফাজ্জল হোসেন খান", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026175", "name": "মোঃ ফাহাদ শেখ", "father": "শেখ মোঃ জহিরুল ইসলাম (হিরু)", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026176", "name": "রেহান রবিন জুয়েল", "father": "মোঃ শফিকুুল ইসলাম বকুল", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026177", "name": "মোঃ সাকিব শেখ", "father": "মোহাম্মদ আল-আমীন শেখ", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "AB+"},
-    {"id": "MMS2026178", "name": "মঞ্জিলা আক্তার", "father": "হালিম সর্দার", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026179", "name": "মুহম্মদ হাবিবুল্লাহ্ জাহাঙ্গীর", "father": "মুহম্মদ শাফি উদ্দীন", "address": "রশুনীয়া, সিরাজদিখান, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026180", "name": "শেখ সাব্বির হোসাইন", "father": "শেখ কাউসার", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026181", "name": "মোঃ জাহিদ হাসান শান্ত", "father": "মোঃ শাহজাহান", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026182", "name": "MD Al-amin Sheikh", "father": "MD Faruk Sheikh", "address": "Shekharnagar, Sirajdikhan, Munshiganj", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026183", "name": "শেখ মাহিন আহমেদ জনি", "father": "শেখ শফিক", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026184", "name": "মোঃ ইয়াসিন শেখ", "father": "মোঃ জাকির শেখ", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026185", "name": "মোঃ তামিম ইকবাল", "father": "আঃ সালাম হাওলাদার", "address": "চরখিদিরপুর, কালিরচর, গজারিয়া, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026186", "name": "সুপ্ত চন্দ্র হাওলাদার", "father": "গোপাল চন্দ্র হাওলাদার", "address": "কালিরচর, গজারিয়া, মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026187", "name": "মোঃ মিরাজ হোসেন", "father": "মোঃ বোরহান বেপারী", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "AB+"},
-    {"id": "MMS2026188", "name": "মোঃ সিয়াম মিজি", "father": "মোঃ জালাল মিজি", "address": "নয়াকান্দী, হোসেন্দী, গজারিয়া, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026189", "name": "মোঃ শরিফ হোসেন", "father": "মোঃ সোবাহান ভূঁইয়া", "address": "লতব্দী, সিরাজদিখান, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026190", "name": "হৃদয় বেপারী", "father": "মোতালেব বেপারী", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026191", "name": "MD Nayeem Mia", "father": "Md Abul Kashem", "address": "Hosendi, Gajaria, Munshiganj", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026192", "name": "মোঃ সানি শেখ", "father": "মোঃ সেন্টু শেখ", "address": "বানকাইজ,কলমা,লৌহজং,মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026193", "name": "আরিফুল ইসলাম জয়", "father": "নুরুজ্জামান জিয়াদ", "address": "নয়াকান্দী, হোসেন্দী, গজারিয়া, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026194", "name": "মারুফ খান", "father": "হালিম খান", "address": "বানকাইজ,কলমা,লৌহজং,মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026195", "name": "Md Naimur Rahaman Naim", "father": "Abdul Alim", "address": "Navagram, Baligaon, Tongibari, Munshiganj", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026196", "name": "Md Sabbir Hossain", "father": "Md Jahirul Haque", "address": "Village: Charkhidirpur, Post: Kalirchor, Thana: Gajaria, District: Munshiganj", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026197", "name": "ইমরান শেখ", "father": "রিন্টু শেখ", "address": "বানকাইজ,কলমা,লৌহজং,মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026198", "name": "মোঃ সিয়াম শিকদার", "father": "আবু আল সাইদ শিকদার", "address": "মৈশালা,লৌহজং,মুন্সীগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026199", "name": "MD ALAMIN", "father": "MD SHAH ALAM", "address": "CHAR CHASHI  GUJARIA MUNSHIGANJ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026200", "name": "মোঃ তামিম ইকবাল", "father": "মোঃ মোস্তাফা মিজি", "address": "চরচাষী গজারিয়া মুন্সীগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026201", "name": "MD FOYSAL KHAN", "father": "MD HOSSAIN KHAN", "address": "Village: Kalir char, P.O: Kalir char, P.S: Gajaria, Dist: Munshiganj", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026202", "name": "মোঃ বাপ্পি আহমেদ", "father": "মোঃ বাবুল শেখ", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সীগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026203", "name": "Md Mahim Mahmud Tanvir", "father": "M A Gaffar", "address": "Shekharnagar, Sirajdikhan, Munshiganj", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026204", "name": "মোঃ জাহিদুল ইসলাম পিয়াস", "father": "মোঃ রাজু বেপারী", "address": "দাসতিরবাগ মধ্যপাড়া লৌহজং মুন্সীগঞ্জ", "phone": "N/A", "blood": "AB+"},
-    {"id": "MMS2026205", "name": "মোঃ মাহিন শেখ", "father": "মোঃ আলমগীর শেখ", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সীগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026206", "name": "মোঃ ইমাদুল হাসান সিফাত", "father": "মোঃ রফিক বেপারী", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সীগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026207", "name": "মো: রুবেল ইসলাম", "father": "মৃত: আবুল খায়ের", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সীগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026208", "name": "Md Saiful Islam", "father": "Late Md Shahjahan", "address": "Shekharnagar, Sirajdikhan, Munshiganj", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026209", "name": "মো সাব্বির আহমেদ", "father": "মো নাসির ভূঁইয়া", "address": "নয়াকান্দী, হোসেন্দী, গজারিয়া, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026210", "name": "মোঃ শাকিল আহাম্মেদ", "father": "মোঃ আঃ মালেক ভূইয়া", "address": "নয়াকান্দী, হোসেন্দী, গজারিয়া, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026211", "name": "মোঃ শিহাব শেখ", "father": "মৃত বাবুল শেখ", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সীগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026212", "name": "Md: Mehedi Hasan Tarafder", "father": "Md: Delwer Tarafder", "address": "Sultaniapara, Gazaria, Tongibari, Munshiganj.", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026213", "name": "রিফাতুল ইসলাম", "father": "মো: রফিকুল ইসলাম", "address": "ফুরশাইল, মালখানগর, সিরাজদিখান, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026214", "name": "Md. Nazmul Hassan", "father": "Late. Md. Sahajahan Sarkar", "address": "Charkhidirpur, kalirchor, Gajaria, Munshiganj", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026215", "name": "মোঃ হাবিবুল্লাহ সরকার", "father": "মৃত মোজাম্মেল হক সরকার", "address": "নারায়ণপুর, গজারিয়া, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026216", "name": "MD RASEL", "father": "MD AMAN ULLAH KHAN", "address": "Vill: Dastirbag, P.S: Lohajang, Dist: Munshiganj", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026217", "name": "মোঃ সামিন ইয়াসার", "father": "কাউসার মাহমুদ", "address": "ফুরশাইল, মালখানগর, সিরাজদিখান, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026218", "name": "মোসাঃ মারিয়া কাউসার", "father": "কাউসার মাহমুদ", "address": "ফুরশাইল, মালখানগর, সিরাজদিখান, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026219", "name": "নাজমুল খান", "father": "নুরুজ্জামান খান", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026220", "name": "আলিফ শেখ", "father": "আল-আমিন শেখ", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026221", "name": "মোঃ রিয়াদ", "father": "মৃত জহিরুল ইসলাম শেখ", "address": "বানকাইজ কলমা লৌহজং মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
-    {"id": "MMS2026222", "name": "মোঃ রাজু ভূঁইয়া", "father": "মৃত বাবুল ভূঁইয়া", "address": "দাসতিরবাগ, মধ্যপাড়া, লৌহজং, মুন্সীগঞ্জ", "phone": "N/A", "blood": "O+"},
-    {"id": "MMS2026223", "name": "Md Siyam", "father": "Abdul Alim Tarafder", "address": "Tongibari Munshiganj", "phone": "N/A", "blood": "AB+"},
-    {"id": "MMS2026224", "name": "Md Shahadat Hossain", "father": "Late Md Shahajan", "address": "Mirkadim Munshiganj", "phone": "N/A", "blood": "A+"},
-    {"id": "MMS2026225", "name": "SM Saiful Islam", "father": "Md Sultan Ahmed", "address": "14 no kalunager hazaribagh Dhaka 1209", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026103", "name": "মোঃ ইসমাইল", "father": "নজরুল শেখ", "address": "গ্রাম: কলমা, ইউনিয়ন : কলমা, উপজেলা : লৌহজং,জেলা: মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026104", "name": "মোঃ ইয়াকুব খান", "father": "মোঃ আলি খান", "address": "মুন্সিগঞ্জ জেলা লৌহজং থানা খিদির পাড়া ইউনিয়ন গ্রাম করার বাগ৷ ৯নং ওয়্যার্ড", "phone": "N/A", "blood": "AB+"},
+    {"id": "MMS2026105", "name": "রাসেল দেওয়ান", "father": "মোহন মিয়া দেওয়ান", "address": "মুন্সি গন্জ সদর থানা", "phone": "N/A", "blood": "জানা নেই"},
+    {"id": "MMS2026106", "name": "আলমগীর হোসাইন", "father": "তোতা মাদবর", "address": "ঝাউটিয়,লৌহজং তেউটিয়,লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026107", "name": "Md. Sharif Hossain", "father": "Md. Anwar Hossain", "address": "গ্রামঃ দাস্তির বাগ, ইউনিয়নঃ খিদিরপাড়া, থানাঃ লৌহজং, জেলাঃ মুন্সীগঞ্জ।", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026108", "name": "মাওলানা আসাদুল্লাহ খান আল-আমিন", "father": "মৃত মুফতি আহসান উল্লাহ", "address": "কলমা লৌহজং মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026109", "name": "মো: ওসমান শেখ", "father": "মো:রফিক শেখ", "address": "ইসলামপুর, বালিগাও, টংগীবাড়ি, মুন্সিগন্জ", "phone": "N/A", "blood": "জানা নেই"},
+    {"id": "MMS2026110", "name": "মনসুর আলী", "father": "মুজিবপর বেপারী", "address": "বানাদেশ নপাড়া নড়িয়া শরীয়তপুর", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026111", "name": "রুহুল আমিন", "father": "ইদ্রিস হাওলাদার", "address": "কামারখারা, টঙ্গী বাড়ি , মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026112", "name": "Mahmuda akther mim", "father": "Md milon bepary", "address": "Louhojong kolma", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026113", "name": "মোহাম্মাদ আশরাফ", "father": "জাহাঞ্জীর আলম", "address": "রশুনিয়া.সিরাজদিখান. মুন্সিগঞ্জ।", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026114", "name": "মো: তরিকুল ইসলাম", "father": "মো:আনিস সরকার", "address": "বাঘাইকান্দি,ভিটিহোগলা,মুন্সিগঞ্জ,মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026115", "name": "মোঃ আবু সাঈদ", "father": "মোঃ সুলতান বেপারি", "address": "কাতলাপাড়া,৮নং ওয়ার্ড, মিরকাদিম পৌরসভা, মুন্সিগন্জ সদর, মুন্সিগন্জ।", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026116", "name": "Hanif Talukder", "father": "Late  Abdul Aziz talukder", "address": "করার বাগ, খিদিরপাড়া  ইউনিয়ন\nলৌহজং মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026117", "name": "আফরিন", "father": "আলিম", "address": "বাঘড়া ইউনিয়ন,শ্রীনগর,মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026118", "name": "মোঃ ইসহাক", "father": "হাঃ সিদ্দিক মোল্যা", "address": "কুকটিয়া শ্রীনগর মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026119", "name": "মোঃ আতিকুর রহমান", "father": "মোঃ ছিদ্দিক সরকার", "address": "আব্দুল্লাহপুর, টঙ্গীবাড়ি, মুন্সিগঞ্জ", "phone": "N/A", "blood": "জানা নেই"},
+    {"id": "MMS2026120", "name": "হযরত আলি", "father": "নবি আলি হালদার", "address": "বেশনাল,দিঘীরপাড়, টংগীবাড়ি", "phone": "N/A", "blood": "A-"},
+    {"id": "MMS2026121", "name": "মো: অনিক কাজী", "father": "কাজী আতাহার", "address": "বয়রাগাদী  সিরাজ দিখান মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026122", "name": "MD. RAJA MIAH SARDAR", "father": "SHAMSUDDIN SARDAR", "address": "abdullapur  tongi Bari  munshiganj", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026123", "name": "ইসমাহিল  মাদবর", "father": "নুরু মাদবর", "address": "টঙ্গীবাড়ি মুন্সিগঞ্জ কামাখারা ইউনিয়", "phone": "N/A", "blood": "A-"},
+    {"id": "MMS2026124", "name": "দুলাল বেপারী", "father": "আব্দুল হাই বেপারী", "address": "মধ্যপাড়া, সিরাজদিখান, মুন্সিগঞ্জ।", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026125", "name": "হাবিবুর রহমান", "father": "আব্দুর রশিদ", "address": "ইছাপুর, সিরাজদিখান, মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026126", "name": "মোঃ রাজিব হোসেন", "father": "মৃত আঃ খালেক মোল্যা", "address": "শিলই চর বেহের পাড়া মুন্সিগঞ্জ  সদর", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026127", "name": "আসমা আক্তার", "father": "মৃত্যু আলাউদ্দিন বেপারী", "address": "গ্রাম ঃ- জিরানন্দ পট্টি, পোঃ- মিরকাদিম, থানা+জেলাঃ- মুন্সিগঞ্জ।", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026128", "name": "রুপা বেগম", "father": "মঞ্জিল মোল্লা", "address": "উত্তর ইসলামপুর, মুন্সিগঞ্জ।", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026129", "name": "জহিরুল ইসলাম", "father": "কামরুল সিকদার", "address": "বাংলাবাজার, মুন্সিগন্জ সদর, জেলা মুন্সিগন্জ", "phone": "N/A", "blood": "AB+"},
+    {"id": "MMS2026130", "name": "মোঃ ওমর ফারুক  হালদার", "father": "মোহাম্মদ রফিক হালদার", "address": "কামারখারা টঙ্গী বাড়ি  মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026131", "name": "আঃ কাদির", "father": "মহিউদ্দিন মোল্যা", "address": "বেশনাল", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026132", "name": "MOHAMMED SUJON SHEIKH", "father": "NUR MOHAMED", "address": "মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026133", "name": "মোঃ ওয়াসিম", "father": "মৃত্যু: মোঃ হারাব শাহ্", "address": "গ্রাম ও পোস্ট অফিস: টেংগারচর, থানা: গজারিয়া,  জেলা: মুন্সিগঞ্জ ঢাকা বাংলাদেশ", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026134", "name": "মোঃ জুয়েল বেপারী", "father": "মৃত আবুল হোসেন বেপারী", "address": "আব্দুল্লাহপুর ৩ নং ওয়ার্ড, টঙ্গীবাড়ী,মুন্সিগঞ্জ", "phone": "N/A", "blood": "জানা নেই"},
+    {"id": "MMS2026135", "name": "মানিক মিয়া", "father": "মৃত সাহেব আলী বেপারী", "address": "গ্রাম:বেহের পাড়া পোস্ট: দিঘীর পাড় থানা: টঙ্গীবাড়ি জেলা: মুন্সীগঞ্জ।", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026136", "name": "Abdul Barek", "father": "Md jabbar munshi", "address": "Beshnal,kamarkhara,Tongibari,Munshiganj", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026137", "name": "সেখ শান্ত", "father": "সোহরাব শেখ", "address": "বানকাইজ, কলমা, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026138", "name": "সাইফ আল ইসলাম ভূঁইয়া", "father": "হাজী মোহাম্মদ শাহজালাল ভূঁইয়া", "address": "গ্রাম দোসর পাড়া ইউনিয় লতবদি থানা সিরাজদিখান", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026139", "name": "ইফতেখার ইসলাম সোহেল", "father": "ইউনুস শেখ", "address": "গ্রাম উত্তর ইউনিয়ন তন্তর  শ্রীনগর মুন্সীগঞ্জ", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026140", "name": "Abdullah Mohammed Taher", "father": "Jahirul haque", "address": "Baliakandi, banglabazar, munshigonj", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026141", "name": "মো: জাহিদ  শেখ",
+    "father": "মো: বাচ্চু শেখ", "address": "বয়রাগাদী সিরাজদিখান মুন্সিগনজ", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026142", "name": "মোঃ মাকসুদ হোসেন", "father": "বাদশা মিয়া শেখ", "address": "বানিয়াগাও, বেজগাও, লৌহজং, মুন্সিগঞ্জ", "phone": "N/A", "blood": "AB+"},
+    {"id": "MMS2026143", "name": "Mawlana Shahidullah", "father": "Abdul Hai Hawlader", "address": "KamarKhara, Sarnagram, Tongibari, Munshiganj", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026144", "name": "দ্বীন ইসলাম", "father": "আলী মিয়া বেপারী", "address": "Dewankandi, adhara,sadar", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026145", "name": "ইমরান দেওয়ান", "father": "আনোয়ার দেওয়ান", "address": "গ্রাম: দ্বীপাড়া,  ইউনিয়ন : বেতকা,  উপজেলা : টঙ্গীবাড়ী,  জেলা : মুন্সিগঞ্জ", "phone": "N/A", "blood": "AB+"},
+    {"id": "MMS2026146", "name": "আবদুল্লাহ", "father": "মোতালেব বেপারী", "address": "নোয়াদ্দা", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026147", "name": "শারমিন সুলতানা", "father": "মোঃ আরব আলী", "address": "কাশীপুর। কাউন্সিল। ফতুল্লা। নারায়ণগঞ্জ", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026148", "name": "শারমিন আক্তার", "father": "দেলোয়ার হোসেন", "address": "গ্রাম মধ্যপাড়া ইউনিয়ন মধ্যপাড়া উপজেলা সিরাজদিখান জেলা মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026149", "name": "MD JASHIM", "father": "MD SHAHABUDDIN SHEIKH", "address": "CHOTFOTIA, BETKA BAZAR,TONGIBARI,MUNSIGUNJ", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026150", "name": "Rafiqul Hassan Russell", "father": "A j M Shahidullha", "address": "Motokpur, Dhipur, Tongibari Monshigonj", "phone": "N/A", "blood": "AB-"},
+    {"id": "MMS2026151", "name": "মোহাম্মদ শফিকুল ইসলাম", "father": "মোহাম্মদ তাজুল ইসলাম", "address": "কড়ার বাগ, খিদির পারা, লৌহজ;, মুন্সি গঞ্জ", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026152", "name": "ইঞ্জিনিয়ার হাবিবুর রহমান জুয়েল", "father": "মরহূম হাতেম আলী বেপারী", "address": "দিঘীরপাড় জেলা মুন্সিগঞ্জ উপজেলার টঙ্গীবাড়ী থানা টঙ্গীবাড়ী গ্রাম", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026153", "name": "Abul basar Sorder", "father": "Md.noroul islam sorder", "address": "Barun.po.barun.ps.kapasia.Gazipur", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026154", "name": "আল আমিন খলিফা", "father": "আব্দুল আজিজ খলিফা", "address": "কামারখাড়া, স্বর্নগ্রাম, টংগিবাড়ী, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026155", "name": "রাবেয়া শারমিন", "father": "জয়নাল আবদীন", "address": "গ্রাম+ইউ: বেজগাঁও, লৌহজং, মুন্সিগঞ্জ।", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026156", "name": "Shakil Ahmed", "father": "Rana Ahmed", "address": "Furshail . Malkhanogor.shirajdikan", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026157", "name": "মোঃ জাহাঙ্গীর হোসেন", "father": "মোঃ শফিউদ্দিন", "address": "গ্রাম,আব্দুল্লাহপুর, ইউনিয়ন, আব্দুল্লাহপুর, উপজেলা ,টঙ্গীবাড়ি ,জেলা ,মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026158", "name": "মুহাম্মদ নাহিদ খাঁন", "father": "আবদুল লতিফ খাঁন", "address": "গাঁওদিয়া, গাঁওদিয়া, লৌহজং, মুন্সীগঞ্জ।", "phone": "N/A", "blood": "AB+"},
+    {"id": "MMS2026159", "name": "সিফাত ভূইঁয়া", "father": "ফরহাদ হোসেন ভূইঁয়া", "address": "উওর কাসী কসবা,রামপাল ইউনিয়ন, মুন্সীগঞ্জ সদর,", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026160", "name": "মোঃ তোফাজ্জল হোসেন", "father": "মোঃ জেদ্দাল হোসেন বেপারী", "address": "ফুলতলা,চরকেওয়ার,মুন্সিগঞ্জ সদর,মুন্সিগঞ্জ ৷", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026161", "name": "শেরা আলী ভূঁইয়া", "father": "মিছির আলী ভূঁইয়া", "address": "মোল্লাকান্দি ইউনিয়ন। ঢালি কান্দির চর সেরাজাবাদ", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026162", "name": "Md. Sagor Hossain", "father": "Md. Abul Hossain", "address": "Doskani,panchosar,munshiganj", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026163", "name": "এডভোকেট শামীম মাহমুদ", "father": "দিল মোহাম্মদ", "address": "গ্রাম: ডিঙ্গাভাঙ্গা,ইউনিয়ন:পঞ্চসার,উপজেলা:মুন্সিগঞ্জ সদর,জেলা:মুন্সিগঞ্জ।", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026164", "name": "Md shahadat hossin", "father": "Ahsan ulla", "address": "Pura tongibari Munshignaj", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026165", "name": "md jual rana", "father": "Allauddin Bepari", "address": "South medinimondal,louhojonj,munshigonj", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026166", "name": "মোহাম্মদ নুর", "father": "নুর ইসলাম মোল্লা", "address": "দিঘিড় পাড় ইউনিয়ন টংগিবাড়ি মুনসিগনজ", "phone": "N/A", "blood": "AB+"},
+    {"id": "MMS2026167", "name": "মোঃ শরীফ হোসেন মুন্সী", "father": "মোঃ আওলাদ হোসেন", "address": "মুন্সীগঞ্জ সিরাজদিখান বালুচর ইউনিয়ন", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026168", "name": "রেজাউল করিম মাদবর", "father": "আলি আকবর মাদবর", "address": "পাইক পাড়া টংগীবাড়ি মুন্সীগজ", "phone": "N/A", "blood": "জানা নেই"},
+    {"id": "MMS2026169", "name": "Noman ahmad", "father": "Mufty md harunur rashid", "address": "Hatkhan, joshlong,tongibari,munshigonj.", "phone": "N/A", "blood": "B-"},
+    {"id": "MMS2026170", "name": "শুভ হাওলাদার", "father": "আব্দুল হামিদ হাওলাদার", "address": "মুন্সিগঞ্জ টঙ্গীবাড়ি আব্দুল্লাপুর", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026171", "name": "মাসুদ দেওয়ান", "father": "মোকলেছ দেওয়ান", "address": "চন্দন ধুল, ইছাপুরা, সিরাজদিখান, মুন্সিগঞ্জ।", "phone": "N/A", "blood": "জানা নেই"},
+    {"id": "MMS2026172", "name": "Kazi Emtiaz Quraishi", "father": "Let. Alhaj Kazi Mokhlesur Rahaman Quraishi", "address": "Utter Kewar (Khalilur Rahaman Peersaheb Baree ) , Mohakali, Oard No -1, Munshiganj Sadar, Munshiganj.", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026173", "name": "Md.Hanif Islam Arif", "father": "Salauddin bepary", "address": "Charkewar union porisod. Jela Munshiganj sodor", "phone": "N/A", "blood": "জানা নেই"},
+    {"id": "MMS2026174", "name": "আলমগীর হোসেন", "father": "ছবু মোল্লা", "address": "মোল্লা কান্দি ইউনিয়ন আনন্দপুর গ্রাম উপজেলা মুন্সিগঞ্জ সদর", "phone": "N/A", "blood": "জানা নেই"},
+    {"id": "MMS2026175", "name": "আব্দুল রহমান", "father": "আলম বেপারী", "address": "ডুলিহাটা ডিপুর টগিবারী মুন্সিগজ", "phone": "N/A", "blood": "AB+"},
+    {"id": "MMS2026176", "name": "মোঃ সজিব শেখ", "father": "মোঃ ফজলুল হক", "address": "বাসা-৮১৮ ভাটপাড়া, কামারখাড়া, টংগীবাড়ি, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026177", "name": "মোঃ কুতুব উদ্দিন", "father": "আহসান উল্লাহ খান", "address": "দক্ষিণ মুলচর 5 নং ওয়ার্ড দিঘীরপাড় টঙ্গীবাড়ী মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026178", "name": "মুহাম্মাদ রানা", "father": "মোহাম্মাদ মজিবর রহমান", "address": "মাঠপাড়া সদর মুন্সীগঞ্জ", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026179", "name": "আলো আক্তার", "father": "মো : বাবুল মিয়া", "address": "টরকী, চরকেওয়ার, মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026180", "name": "Jahidul Islam Gazi", "father": "হাজী মোঃ আব্দুর রহমান গাজী", "address": "গ্রামঃ খাসমহল বালুচর, ইউনিয়নঃ বালুচর, থানাঃ সিরাজদিখান, জেলাঃ মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026181", "name": "নাসির শেখ", "father": "কাসেম শেখ", "address": "গ্রাম নয়নয়াদ উপজেলা টংগীবাডী জেলা মুন্সীগঞ্জ ইউনিয়ন ঠিপুর", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026182", "name": "Urme akter", "father": "Abu sahid sheikh", "address": "North betka,Betka,Tongibari,Munshiganj", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026183", "name": "মো সোবহান প্রধান", "father": "মো মজিবুর রহমান", "address": "পুরান বাউশিয়া গজারিয়া মুন্সি গন্জ", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026184", "name": "মো: শামীম হোসেন", "father": "মৃত : মো:ইব্রাহিম শেখ", "address": "জেলা:মুন্সীগঞ্জ/থানা:টংগীবাড়ী /ইউনিয়ন:বেতকা/গ্রাম:ছটফটিয়া।", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026185", "name": "মোঃ বিল্লাল হোসেন", "father": "আফছার উদ্দিন", "address": "নয়াগাঁও সিরাজ দিখান মুন্সিগঞ্জে", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026186", "name": "সোহাগ হালদার", "father": "নুরুল আমিন হাওলাদার", "address": "বানাদেশ, দিঘিরপাড়, টঙ্গীবাড়ী, মুন্সীগঞ্জ", "phone": "N/A", "blood": "জানা নেই"},
+    {"id": "MMS2026187", "name": "Md.Miraz Ahmed Deowan", "father": "Md.Harun or rashid deowan", "address": "বালিগাও টংগীবাড়ী", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026188", "name": "ফাহিমা আক্তার শিলা", "father": "মজিবুর ঢালি", "address": "পূর্ব আলদী, টঙ্গীবাড়ী, মুন্সিগঞ্জ।", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026189", "name": "MOLLAH MIZANUR RAHMAN", "father": "Abul hossain mollah", "address": "Bagbari,bibondi,srenagar,Munshigonj", "phone": "N/A", "blood": "O-"},
+    {"id": "MMS2026190", "name": "ওয়াসিম", "father": "আনসু মল্লিক", "address": "গ্রাম দক্ষিন কেওয়ার ইউনিয়ন মহাকালী থানা উপজেলা মুন্সিগঞ্জ", "phone": "N/A", "blood": "জানা নেই"},
+    {"id": "MMS2026191", "name": "মোঃ আবু বক্কর সিদ্দিক", "father": "মোঃ আক্কাছ আলী", "address": "গ্রাম,- খাসমহল বালুচর\nইউনিয়ন,-খাসমহল বালুচর \nসিরাজদিখান মুন্সিগঞ্জ", "phone": "N/A", "blood": "AB+"},
+    {"id": "MMS2026192", "name": "Md Sharif Hossain", "father": "Abul Kalam Molla", "address": "Panam, Rampal, Mirkadim, Munshiganj Sador, Munshiganj.", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026193", "name": "ইঞ্জিনিয়ার মোঃ ইব্রাহিম বেপারি", "father": "মোঃ মিজানুর রহমান বেপারি", "address": "গ্রাম: ভাসার চর বেপারি বাড়ি, ইউনিয়ন:গুয়াগাছিয়া, উপজেলা: গজারিয়া, জেলা: মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026194", "name": "Moniruggaman", "father": "Md jobbar fakir", "address": "Bill:nurpoor. Union: haridiea. P/s: lohojong. Dust: munshigonj", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026195", "name": "প্রকৌশলী মুহাম্মদ রাসেল খন্দকার", "father": "এএইচএম হাবিবুল্লাহ খন্দকার", "address": "গ্রাম+পোঃ লতব্দী, ইউনিয়ন ঃলতব্দী,উপজেলা ঃসিরাজদিখান,জেলাঃমুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026196", "name": "রবিন রাজ", "father": "মো:মুক্তার হোসেন", "address": "সমসাবাদ ষোলঘর", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026197", "name": "মোঃ ফিরোজ আহমেদ", "father": "মোঃ জালাল উদ্দিন", "address": "গ্রাম -দক্ষিন ফুলদী, ইউনিয়ন -গজারিয়া, উপজেলা -গজারিয়া,জলা- মুন্সীগঞ্জ", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026198", "name": "MD EMRAN", "father": "mo nuru halder", "address": "munsrhaganj jela thana tongibadi union dighirpad", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026199", "name": "গাজী ফয়সাল", "father": "নূরে মাওলা গাজী", "address": "জেলা, মুন্সিগঞ্জ \nউপজেলা, সিরাজদিখান \nইউনিয়ন, বয়রাগাদী \nগ্রাম, ছোটপাউলদিয়া", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026200", "name": "বিল্লাল হোসেন", "father": "শফি সরদার", "address": "ছোট মাকহাটি, মহাখালী, সদর, মুন্সিগঞ্জ", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026201", "name": "Md Alamgir Hossain (Emon)", "father": "Md. Joynal Sheikh", "address": "28/2A Ganak Tulle lane dhaka -12050", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026202", "name": "মোঃ হেলাল খান আদি", "father": "আব্দুল খালেক মাতুব্বর", "address": "মুন্সিগঞ্জ শ্রীনগর বালাশুর", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026203", "name": "আবুল খায়ের সেন্টু", "father": "মৃত আবুল কাশেম", "address": "গ্রাম বক্তারকান্দি, ইউনিয়ন বাউশিয়া,গজারিয়া, মুন্সিগঞ্জ", "phone": "N/A", "blood": "জানা নেই"},
+    {"id": "MMS2026204", "name": "শান্ত শেখ", "father": "আক্কাস শেখ", "address": "পানিয়া,তন্তর,শ্রীনগড়,মুন্সীগঞ্জ", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026205", "name": "আরিফ জমাদার", "father": "নুরুল ইসলাম জমাদার", "address": "গ্রাম: চর-বলাকী ১৫১০,\nইউনিয়ন: হোসেন্দী,\nউপজেলা: গজারিয়া,\nজেলা: মুন্সীগুঞ্জ", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026206", "name": "মো: কবির হোসেন", "father": "হাসেম হালদার", "address": "গ্রাম: বানাদেশ\nইউনিয়ন: দিঘীরপার\nউপজেলা: মুন্সীগন্জ সদর\nজেলা: মুন্সীগন্জ", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026207", "name": "মোঃ ফাহিম ইসলাম রোমান", "father": "মোঃ আবু কালাম বাগোজা", "address": "গ্রাম:নোয়াদ্দ,ইউনিয়ন:আউটশাহী,উপজেলা :টংগিবাড়ি, জেলা:মুন্সিগঞ্জ", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026208", "name": "মোঃ আনোয়ারুল হক (রাফি)", "father": "মোঃ মকছেদ আলী", "address": "হাতীবান্ধা, লালমনির হাট, রংপুর।", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026209", "name": "Md Mehedi Hasan Bepari", "father": "Saheb Ali Bepari", "address": "Beherpara, Dighirpar, Tongibari, Munshiganj", "phone": "N/A", "blood": "AB+"},
+    {"id": "MMS2026210", "name": "Shakib Shake Miraj", "father": "Mogibor Rahman", "address": "DASTIRBAG, khidirpara,lohojong, munshigonj", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026211", "name": "MD RASEL", "father": "MD ABDUS SALAM", "address": "Viill-Bhatneshar p.o- Ariol p.s- Tongibari Dist-Munshiganj .", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026212", "name": "মো শিপন খলিফা", "father": "হাজী কাদির খলিফা", "address": "আব্দুল্লাহপুর টংগিবাড়ী মুন্সীগঞ্জ", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026213", "name": "মোঃ নুরজামাল হোসেন", "father": "মোঃ সিরাজ মৃধা", "address": "বাসা- নং-১০০০৪২, গ্রাম - নসংকর -পোস্ট অফিস - নসংকর-১৫২৫-ওয়ার্ড নং -৬ - ইউনিয়ন - কামারখাড়া - থানা - টংগীবাড়ী - জেলা -মুন্সিগঞ্জ", "phone": "N/A", "blood": "জানা নেই"},
+    {"id": "MMS2026214", "name": "Al maruf apon", "father": "Aslam sheikh", "address": "Kazi kosba rampal Munshignaj", "phone": "N/A", "blood": "A+"},
+    {"id": "MMS2026215", "name": "Mohammad Robel", "father": "Sultan Sardar", "address": "Bankaij . kalma.Louhajong . Mounshiganj", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026216", "name": "শেখ শাহানা আক্তার ইতি", "father": "মোঃ আলী হোসেন শেখ", "address": "বাসা-৭৯১, গ্রাম - নসংকর-পোস্ট অফিস - নসংকর- ১৫২৫- ওয়াড নং-৬ ইউনিয়ন - কামারখাড়া- থানা- টংগীবাড়ি- জেলা- মুন্সিগঞ্জ", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026217", "name": "MD.Anwar Hossain", "father": "Abdul jalil bepari", "address": "Chardegree.p.o.hoglakandi,gazaria,munshiganj", "phone": "N/A", "blood": "AB+"},
+    {"id": "MMS2026218", "name": "মোঃ রোকন", "father": "আব্দুল হালিম", "address": "সলিমাবাদ ওয়াড নং 4 পোস্ট আব্দুল্লাপুর টংগীবাড়ি মুন্সীগঞ্জ", "phone": "N/A", "blood": "জানা নেই"},
+    {"id": "MMS2026219", "name": "মো: আবু তাহের", "father": "মো: আবদুর রাজ্জাক", "address": "চিনাবুনিয়া, চালিতাবুনিয়া, রাঙ্গাবালী, পটুয়াখালী", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026220", "name": "মোঃ মোকলেস শেখ", "father": "হাজারী শেখ", "address": "কড়ারবাগ, খিদিরপাড়া, লৌহজং, মুন্সিগঞ্জ।", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026221", "name": "আওলাদ হোসেন", "father": "মিরালি হালদার", "address": "ভিটি মালধা", "phone": "N/A", "blood": "AB+"},
+    {"id": "MMS2026222", "name": "অন্তর ইসলাম অন্তু।", "father": "মো:সাচ্চু হোসেন।", "address": "গোড়াকান্দা। কলমা। লৌহজং । মুন্সিগজ।", "phone": "N/A", "blood": "B+"},
+    {"id": "MMS2026223", "name": "Nahid hasan", "father": "Abu sayed", "address": "Kutipara ,mirkadim. munsigonj", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026224", "name": "sheikh Sharif", "father": "Samsul sheikh", "address": "গ্রাম নেত্রাবতী সোনা রং ইউনিয়ন উপজেলা টঙ্গীবাড়ী", "phone": "N/A", "blood": "O+"},
+    {"id": "MMS2026225", "name": "Ruma Akter", "father": "MD Delour hosen", "address": "14 no kalunager hazaribagh Dhaka 1209", "phone": "N/A", "blood": "O+"},
     {"id": "MMS2026226", "name": "RABBI HASAN", "father": "MD KAMAL", "address": "Mirkadim Munshiganj", "phone": "N/A", "blood": "O+"}
   ]);
 
@@ -213,6 +231,64 @@ export default function Dashboard() {
     m.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
     m.address.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // যদি লগইন করা না থাকে তবে লগইন পেজ দেখাবে
+  if (!isLoggedIn) {
+    return (
+      <div className="min-h-screen bg-emerald-900 flex items-center justify-center p-4 font-sans">
+        <div className="bg-white rounded-2xl max-w-md w-full p-8 shadow-2xl border border-emerald-100 space-y-6">
+          <div className="text-center space-y-2">
+            <div className="w-16 h-16 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto shadow border-2 border-emerald-600">
+              <Lock className="w-8 h-8" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-800">অ্যাডমিন লগইন</h2>
+            <p className="text-xs text-gray-500">মুন্সিগঞ্জ মানবসেবা সংগঠন ম্যানেজমেন্ট সিস্টেম</p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <label className="block text-xs font-semibold text-gray-600 mb-1">মোবাইল নম্বর (ID)</label>
+              <input 
+                type="text" 
+                placeholder="01568000445" 
+                value={loginPhone}
+                onChange={(e) => setLoginPhone(e.target.value)}
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-emerald-600"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-gray-600 mb-1">পাসওয়ার্ড (Password)</label>
+              <input 
+                type="password" 
+                placeholder="••••••••" 
+                value={loginPassword}
+                onChange={(e) => setLoginPassword(e.target.value)}
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-emerald-600"
+                required
+              />
+            </div>
+
+            {loginError && (
+              <p className="text-xs text-rose-500 font-medium text-center">{loginError}</p>
+            )}
+
+            <button 
+              type="submit"
+              className="w-full py-3 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl font-medium text-sm transition-colors shadow-md"
+            >
+              লগইন করুন
+            </button>
+          </form>
+
+          <div className="text-center pt-2 border-t border-gray-100">
+            <p className="text-xs text-gray-400">Software & Web Developer: কাউসার মাহমুদ</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
@@ -248,7 +324,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* 🔴 ডান দিক থেকে বাম দিকে চলমান (Marquee) ডেভেলপার ইনফো */}
+        {/* 🔴 চলমান (Marquee) ডেভেলপার ইনফো */}
         <div className="flex-1 max-w-xs sm:max-w-xs overflow-hidden bg-emerald-900/80 px-3 py-1.5 rounded-full text-xs border border-emerald-700/60 shadow-inner">
           <marquee behavior="scroll" direction="left" scrollamount="4" className="flex items-center text-white font-medium">
             <span className="text-emerald-200 mr-2">Software/Web Developer:</span>
@@ -279,54 +355,58 @@ export default function Dashboard() {
           </marquee>
         </div>
 
-        {/* প্রোফাইল রোল */}
-        <div className="hidden lg:flex items-center gap-2">
+        {/* ডানপাশে Admin রোল ও লগআউট বাটন */}
+        <div className="flex items-center gap-2">
           <span className="bg-emerald-700 text-emerald-100 text-xs px-2.5 py-1 rounded-full border border-emerald-600">
-            রোল: সুপার অ্যাডমিন
+            Admin
           </span>
-          <div className="w-8 h-8 bg-emerald-600 rounded-full flex items-center justify-center font-bold text-sm border border-emerald-400">
-            অ
-          </div>
+          <button 
+            onClick={() => setIsLoggedIn(false)}
+            title="লগআউট"
+            className="p-1.5 bg-emerald-700 hover:bg-rose-600 text-white rounded-full transition-colors border border-emerald-600"
+          >
+            <LogOut className="w-4 h-4" />
+          </button>
         </div>
       </header>
 
       {/* মূল বডি Layout */}
-      <div className="flex flex-1">
+      <div className="flex flex-1 flex-col md:flex-row">
         
-        {/* 🟢 সাইডবার */}
-        <aside className="w-64 bg-white border-r border-gray-200 p-4 hidden md:flex flex-col justify-between">
-          <div className="space-y-6">
+        {/* 🟢 সাইডবার (মোবাইল ও পিসির জন্য রেসপন্সিভ) */}
+        <aside className="w-full md:w-64 bg-white border-r border-gray-200 p-3 md:p-4 flex flex-row md:flex-col justify-between overflow-x-auto md:overflow-visible shrink-0 gap-2">
+          <div className="flex md:flex-col space-x-2 md:space-x-0 md:space-y-6 w-full">
             <div>
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">প্রধান মেনু</p>
-              <nav className="space-y-1">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3 hidden md:block">প্রধান মেনু</p>
+              <nav className="flex md:flex-col space-x-1 md:space-x-0 md:space-y-1">
                 <button 
                   onClick={() => setActiveTab('dashboard')}
-                  className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-left ${activeTab === 'dashboard' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
+                  className={`flex items-center gap-2 md:gap-3 px-3 py-2 text-xs md:text-sm font-medium rounded-lg whitespace-nowrap ${activeTab === 'dashboard' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
                 >
                   <Users className="w-4 h-4" /> ড্যাশবোর্ড
                 </button>
                 <button 
                   onClick={() => setActiveTab('members')}
-                  className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-left ${activeTab === 'members' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
+                  className={`flex items-center gap-2 md:gap-3 px-3 py-2 text-xs md:text-sm font-medium rounded-lg whitespace-nowrap ${activeTab === 'members' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
                 >
                   <Users className="w-4 h-4" /> সদস্য ব্যবস্থাপনা
                 </button>
                 <button 
                   onClick={() => setActiveTab('donations')}
-                  className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-left ${activeTab === 'donations' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
+                  className={`flex items-center gap-2 md:gap-3 px-3 py-2 text-xs md:text-sm font-medium rounded-lg whitespace-nowrap ${activeTab === 'donations' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
                 >
                   <DollarSign className="w-4 h-4" /> অনুদান ও হিসাবরক্ষণ
                 </button>
                 <button 
                   onClick={() => setActiveTab('services')}
-                  className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-left ${activeTab === 'services' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
+                  className={`flex items-center gap-2 md:gap-3 px-3 py-2 text-xs md:text-sm font-medium rounded-lg whitespace-nowrap ${activeTab === 'services' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
                 >
                   <Heart className="w-4 h-4" /> সেবাসমূহ
                 </button>
               </nav>
             </div>
 
-            <div>
+            <div className="hidden md:block">
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">অন্যান্য</p>
               <nav className="space-y-1">
                 <button 
