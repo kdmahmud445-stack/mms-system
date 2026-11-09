@@ -1,39 +1,88 @@
 import React, { useState } from 'react';
 import { 
   Users, DollarSign, Heart, Calendar, Shield, 
-  Code, Phone, X, ExternalLink 
+  Code, Phone, X, ExternalLink, Crown, MapPin, User 
 } from 'lucide-react';
 
 export default function Dashboard() {
   const [showDevModal, setShowDevModal] = useState(false);
+  const [activeTab, setActiveTab] = useState('dashboard');
+
+  // প্রতিষ্ঠাতা পরিষদের ৪ জন স্থায়ী সদস্যের সঠিক তথ্য ও ছবি
+  const founders = [
+    {
+      id: 1,
+      name: 'নাজমুল',
+      role: 'সভাপতি, প্রতিষ্ঠাতা পরিষদ',
+      father: 'মোঃ হানিফ শেখ',
+      phone: '01819390632',
+      address: 'গ্রামঃ দাসতির বাগ, ইউঃ মধ্যপাড়া, উপজেলাঃ সিরাজদিখান, মুন্সিগঞ্জ',
+      image: '/id01.jpg' 
+    },
+    {
+      id: 2,
+      name: 'কাউসার মাহমুদ',
+      role: 'সহ-সভাপতি, প্রতিষ্ঠাতা পরিষদ',
+      father: 'নজরুল ইসলাম',
+      phone: '01568000445',
+      address: 'গ্রাম: ফুরশাইল, ইউঃ মালখানগর, উপজেলাঃ সিরাজদিখান, মুন্সিগঞ্জ',
+      image: '/id02.jpg'
+    },
+    {
+      id: 3,
+      name: 'শেখ মোঃ রোমান',
+      role: 'সাধারণ সম্পাদক, প্রতিষ্ঠাতা পরিষদ',
+      father: 'আব্দুল খালেক শেখ',
+      phone: '+966581831594',
+      address: 'গ্রাম: বানকাইজ, ইউঃ কলমা, উপজেলাঃ লৌহজং, মুন্সিগঞ্জ',
+      image: '/id03.jpg'
+    },
+    {
+      id: 4,
+      name: 'মোঃ জসিম হালদার',
+      role: 'কোষাধ্যক্ষ, প্রতিষ্ঠাতা পরিষদ',
+      father: 'হাজী আঃ হাই হালদার',
+      phone: '+966573325256',
+      address: 'গ্রামঃ কামারখারা, ইউঃ স্বর্নগ্রাম, উপজেলাঃ টঙ্গীবাড়ী, মুন্সিগঞ্জ',
+      image: '/id04.jpg'
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       
-      {/* টপ হেডার */}
-      <header className="bg-emerald-800 text-white px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3 shadow-md">
+      {/* 🟢 টপ হেডার */}
+      <header className="bg-emerald-800 text-white px-3 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3 shadow-md">
+        
+        {/* লোগো ও সংগঠনের নাম */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-white text-emerald-800 rounded-full flex items-center justify-center font-bold text-xl shadow">
-            মম
+          <div className="w-10 h-10 sm:w-11 sm:h-11 bg-white rounded-full flex items-center justify-center overflow-hidden shadow border-2 border-emerald-600 shrink-0">
+            <img 
+              src="/logo.jpg" 
+              alt="লোগো" 
+              className="w-full h-full object-cover"
+              onError={(e)=>{
+                e.target.src = '/logo.png';
+              }}
+            />
           </div>
           <div>
-            <h1 className="text-lg sm:text-xl font-bold leading-tight">মুন্সিগঞ্জ মানবসেবা সংগঠন</h1>
-            <p className="text-xs text-emerald-200">মানুষ মানুষের জন্য; মানবতাই সেবা।</p>
+            <h1 className="text-base sm:text-xl font-bold leading-tight">মুন্সিগঞ্জ মানবসেবা সংগঠন</h1>
+            <p className="text-[11px] sm:text-xs text-emerald-200">মানুষ মানুষের জন্য; মানবতাই সেবা।</p>
           </div>
         </div>
 
-        {/* ডেভেলপার ইনফো */}
-        <div className="flex items-center gap-3 bg-emerald-900/60 px-3.5 py-1.5 rounded-full text-xs border border-emerald-700/50">
-          <span className="text-emerald-200 hidden sm:inline">Software/Web Developer:</span>
+        {/* 🔴 ডেভেলপার ইনফো (মোবাইল ও পিসি উভয় স্ক্রিনে দৃশ্যমান) */}
+        <div className="flex items-center gap-2 bg-emerald-900/80 px-3 py-1.5 rounded-full text-xs border border-emerald-700/60 shadow-inner">
+          <span className="text-emerald-200 text-[11px] sm:text-xs">Dev:</span>
           
           <a 
             href="https://www.facebook.com/KDMahmudM" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 hover:text-emerald-300 transition-colors font-medium text-white"
+            className="flex items-center gap-1 hover:text-emerald-300 transition-colors font-medium text-white"
           >
-            {/* ফেসবুক এসভিজি আইকন */}
-            <svg className="w-3.5 h-3.5 fill-current text-blue-400" viewBox="0 0 24 24">
+            <svg className="w-3.5 h-3.5 fill-current text-blue-400 shrink-0" viewBox="0 0 24 24">
               <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
             </svg>
             <span className="hover:underline">কাউসার মাহমুদ</span>
@@ -45,15 +94,16 @@ export default function Dashboard() {
             href="https://wa.me/8801568000445" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 hover:text-emerald-300 transition-colors text-white"
+            className="flex items-center gap-1 hover:text-emerald-300 transition-colors text-white"
           >
-            <Phone className="w-3.5 h-3.5 text-green-400 fill-current" />
+            <Phone className="w-3.5 h-3.5 text-green-400 fill-current shrink-0" />
             <span>01568000445</span>
           </a>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="bg-emerald-700 text-emerald-100 text-xs px-2.5 py-1 rounded-full border border-emerald-600 hidden md:inline-block">
+        {/* প্রোফাইল রোল */}
+        <div className="hidden lg:flex items-center gap-2">
+          <span className="bg-emerald-700 text-emerald-100 text-xs px-2.5 py-1 rounded-full border border-emerald-600">
             রোল: সুপার অ্যাডমিন
           </span>
           <div className="w-8 h-8 bg-emerald-600 rounded-full flex items-center justify-center font-bold text-sm border border-emerald-400">
@@ -62,39 +112,51 @@ export default function Dashboard() {
         </div>
       </header>
 
-      {/* মূল বডি */}
+      {/* মূল বডি Layout */}
       <div className="flex flex-1">
         
-        {/* সাইডবার */}
+        {/* 🟢 সাইডবার */}
         <aside className="w-64 bg-white border-r border-gray-200 p-4 hidden md:flex flex-col justify-between">
           <div className="space-y-6">
             <div>
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">প্রধান মেনু</p>
               <nav className="space-y-1">
-                <a href="#" className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg">
+                <button 
+                  onClick={() => setActiveTab('dashboard')}
+                  className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-left ${activeTab === 'dashboard' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
+                >
                   <Users className="w-4 h-4" /> ড্যাশবোর্ড
-                </a>
-                <a href="#" className="flex items-center gap-3 px-3 py-2 text-sm font-medium bg-emerald-50 text-emerald-700 rounded-lg">
+                </button>
+                <button 
+                  onClick={() => setActiveTab('members')}
+                  className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg text-left"
+                >
                   <Users className="w-4 h-4" /> সদস্য ব্যবস্থাপনা
-                </a>
-                <a href="#" className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg">
+                </button>
+                <button 
+                  onClick={() => setActiveTab('donations')}
+                  className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg text-left"
+                >
                   <DollarSign className="w-4 h-4" /> অনুদান ও হিসাবরক্ষণ
-                </a>
-                <a href="#" className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg">
+                </button>
+                <button 
+                  onClick={() => setActiveTab('services')}
+                  className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg text-left"
+                >
                   <Heart className="w-4 h-4" /> সেবাসমূহ
-                </a>
+                </button>
               </nav>
             </div>
 
             <div>
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">অন্যান্য</p>
               <nav className="space-y-1">
-                <a href="#" className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg">
-                  <Calendar className="w-4 h-4" /> মিটিং ও নোটিশ
-                </a>
-                <a href="#" className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg">
+                <button 
+                  onClick={() => setActiveTab('committee')}
+                  className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-left ${activeTab === 'committee' ? 'bg-emerald-50 text-emerald-700' : 'text-gray-700 hover:bg-gray-50'}`}
+                >
                   <Shield className="w-4 h-4" /> কমিটি ও শাসনকার্য
-                </a>
+                </button>
 
                 <button 
                   onClick={() => setShowDevModal(true)}
@@ -108,44 +170,114 @@ export default function Dashboard() {
           </div>
         </aside>
 
-        {/* মূল কনটেন্ট */}
+        {/* 🟢 মূল কনটেন্ট */}
         <main className="flex-1 p-4 sm:p-6 space-y-6 overflow-y-auto">
-          <div className="bg-emerald-800 rounded-2xl p-6 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-lg">
-            <div>
-              <h2 className="text-xl sm:text-2xl font-bold mb-1">স্বাগতম, অ্যাডমিন প্যানেলে</h2>
-              <p className="text-emerald-200 text-sm">মুন্সিগঞ্জ মানবসেবা সংগঠনের সার্বিক কার্যক্রম ও হিসাবরক্ষণ এক নজরে।</p>
-            </div>
-            <button className="bg-amber-500 hover:bg-amber-600 text-white font-medium px-4 py-2 rounded-lg text-sm shadow transition-colors flex items-center gap-2">
-              <span>+</span> নতুন সদস্য যোগ করুন
-            </button>
-          </div>
+          
+          {/* যদি 'কমিটি ও শাসনকার্য' ট্যাব সিলেক্ট করা হয় */}
+          {activeTab === 'committee' ? (
+            <div className="space-y-6">
+              <div className="bg-emerald-800 rounded-2xl p-6 text-white shadow-lg">
+                <h2 className="text-2xl font-bold mb-1 flex items-center gap-2">
+                  <Crown className="w-6 h-6 text-amber-400" /> প্রতিষ্ঠাতা পরিষদ ও অভিভাবক মণ্ডলী
+                </h2>
+                <p className="text-emerald-200 text-sm">
+                  মুন্সিগঞ্জ মানবসেবা সংগঠনের স্থায়ী নীতি-নির্ধারক ও সর্বোচ্চ অভিভাবকবৃন্দ।
+                </p>
+              </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-              <p className="text-xs text-gray-500">মোট রেজিস্টার্ড সদস্য</p>
-              <h3 className="text-2xl font-bold text-gray-800 my-1">২৪৮ জন</h3>
-              <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">সক্রিয়: ২৩৫ জন</span>
+              {/* ৪ জন প্রতিষ্ঠাতা সদস্যের গ্রিড */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {founders.map((founder) => (
+                  <div key={founder.id} className="bg-white rounded-2xl p-5 border border-gray-100 shadow-md flex flex-col justify-between space-y-4 hover:shadow-lg transition-shadow">
+                    <div className="text-center space-y-3">
+                      <div className="relative w-24 h-24 mx-auto">
+                        <img 
+                          src={founder.image} 
+                          alt={founder.name} 
+                          className="w-24 h-24 rounded-full object-cover border-4 border-emerald-100 shadow"
+                        />
+                        <span className="absolute bottom-0 right-0 bg-amber-500 text-white p-1 rounded-full text-xs shadow">
+                          <Crown className="w-3.5 h-3.5" />
+                        </span>
+                      </div>
+
+                      <div>
+                        <h3 className="font-bold text-gray-800 text-lg">{founder.name}</h3>
+                        <p className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-1">
+                          {founder.role}
+                        </p>
+                      </div>
+
+                      <div className="text-xs text-gray-600 space-y-1 bg-gray-50 p-2.5 rounded-xl border border-gray-100 text-left">
+                        <p className="flex items-center gap-1">
+                          <User className="w-3.5 h-3.5 text-gray-400" /> পিতাঃ {founder.father}
+                        </p>
+                        <p className="flex items-start gap-1">
+                          <MapPin className="w-3.5 h-3.5 text-gray-400 mt-0.5 shrink-0" /> 
+                          <span>{founder.address}</span>
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="pt-2 border-t border-gray-100">
+                      <a 
+                        href={`tel:${founder.phone}`}
+                        className="w-full flex items-center justify-center gap-2 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-medium transition-colors shadow-sm"
+                      >
+                        <Phone className="w-3.5 h-3.5" />
+                        <span>{founder.phone}</span>
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-              <p className="text-xs text-gray-500">চলতি মাসের চাঁদা সংগ্রহ</p>
-              <h3 className="text-2xl font-bold text-gray-800 my-1">৳ ২৪,৫০০</h3>
-              <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded">বকেয়া: ৳ ৩,২০০</span>
-            </div>
-            <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-              <p className="text-xs text-gray-500">বর্তমান ফান্ড ব্যালেন্স</p>
-              <h3 className="text-2xl font-bold text-gray-800 my-1">৳ ১,৮৫,৪০০</h3>
-              <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">ক্যাশ ও ব্যাংক মিলিয়ে</span>
-            </div>
-            <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-              <p className="text-xs text-gray-500">পেন্ডিং আবেদন</p>
-              <h3 className="text-2xl font-bold text-gray-800 my-1">৫ টি</h3>
-              <span className="text-xs bg-rose-100 text-rose-700 px-2 py-0.5 rounded">চিকিৎসা ও সদস্যপদ</span>
-            </div>
-          </div>
+          ) : (
+            // ডিফল্ট ড্যাশবোর্ড ভিউ
+            <>
+              <div className="bg-emerald-800 rounded-2xl p-6 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-lg">
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-bold mb-1">স্বাগতম, অ্যাডমিন প্যানেলে</h2>
+                  <p className="text-emerald-200 text-sm">মুন্সিগঞ্জ মানবসেবা সংগঠনের সার্বিক কার্যক্রম ও হিসাবরক্ষণ এক নজরে।</p>
+                </div>
+                <button 
+                  onClick={() => setActiveTab('committee')}
+                  className="bg-amber-500 hover:bg-amber-600 text-white font-medium px-4 py-2 rounded-lg text-sm shadow transition-colors flex items-center gap-2"
+                >
+                  <Crown className="w-4 h-4" /> প্রতিষ্ঠাতা পরিষদ দেখুন
+                </button>
+              </div>
+
+              {/* পরিসংখ্যান কার্ড */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                  <p className="text-xs text-gray-500">মোট রেজিস্টার্ড সদস্য</p>
+                  <h3 className="text-2xl font-bold text-gray-800 my-1">২৪৮ জন</h3>
+                  <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">সক্রিয়: ২৩৫ জন</span>
+                </div>
+                <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                  <p className="text-xs text-gray-500">চলতি মাসের চাঁদা সংগ্রহ</p>
+                  <h3 className="text-2xl font-bold text-gray-800 my-1">৳ ২৪,৫০০</h3>
+                  <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded">বকেয়া: ৳ ৩,২০০</span>
+                </div>
+                <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                  <p className="text-xs text-gray-500">বর্তমান ফান্ড ব্যালেন্স</p>
+                  <h3 className="text-2xl font-bold text-gray-800 my-1">৳ ১,৮৫,৪০০</h3>
+                  <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">ক্যাশ ও ব্যাংক মিলিয়ে</span>
+                </div>
+                <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                  <p className="text-xs text-gray-500">পেন্ডিং আবেদন</p>
+                  <h3 className="text-2xl font-bold text-gray-800 my-1">৫ টি</h3>
+                  <span className="text-xs bg-rose-100 text-rose-700 px-2 py-0.5 rounded">চিকিৎসা ও সদস্যপদ</span>
+                </div>
+              </div>
+            </>
+          )}
+
         </main>
       </div>
 
-      {/* ডেভেলপার মডাল */}
+      {/* 🔴 ডেভেলপার মডাল */}
       {showDevModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative border border-gray-100">
@@ -181,7 +313,7 @@ export default function Dashboard() {
                     <svg className="w-4 h-4 fill-current text-blue-600" viewBox="0 0 24 24">
                       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
- ফেসবুক প্রোফাইল
+                    ফেসবুক প্রোফাইল
                   </span>
                   <ExternalLink className="w-4 h-4" />
                 </a>
